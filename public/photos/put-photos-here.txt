@@ -1,0 +1,4 @@
+The salon's own photos go in this folder.
+docs/PHOTOS.md lists every file name the site expects, what it should show, and its pixel size.
+After adding a file, point its entry in data/photos.js at it, for example:  src: '/photos/hero.jpg'
+Use only photos the salon owns or has permission to use.

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found | White Stone Salon</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#F1F2EF">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&amp;family=Marcellus&amp;display=swap">
+
+  <!-- This page can be shown for an address at any depth (for example /a/b/c), where a relative link
+       to assets/css/site.css would not resolve. So its few styles are written here, with the same
+       colours and type as site.css. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      padding: 0 clamp(1rem, 4vw, 3rem) 3rem;
+      background: #F1F2EF;
+      color: #1F2D33;
+      font-family: "Hanken Grotesk", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .in { max-width: 34rem; }
+    .wordmark, h1 {
+      margin: 0;
+      font-family: "Marcellus", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-weight: 400;
+    }
+    .wordmark { display: flex; align-items: center; min-height: 4rem; border-bottom: 1px solid #D4D8D2; color: #1F2D33; font-size: 1.375rem; line-height: 1; }
+    .comb {
+      height: 0.875rem;
+      margin: 3rem 0;
+      border-top: 1px solid currentColor;
+      color: #7A8581;
+      background: repeating-linear-gradient(to right, currentColor 0, currentColor 1px, transparent 1px, transparent 6px);
+    }
+    h1 { font-size: clamp(2rem, 1.4rem + 3vw, 3rem); line-height: 1.1; }
+    p { margin: 1rem 0 0; color: #56626A; font-size: 1.125rem; line-height: 1.5; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.625rem 1.25rem;
+      border: 1.5px solid #1F2D33;
+      border-radius: 10px;
+      color: #1F2D33;
+      font-weight: 500;
+      line-height: 1.2;
+      text-decoration: none;
+      transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn--solid { background: #1F2D33; color: #F1F2EF; }
+    :focus-visible { outline: 2px solid #1F2D33; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition-duration: 0.01ms; }
+    }
+  </style>
+</head>
+<body>
+  <main class="in">
+    <p class="wordmark">White Stone Salon</p>
+    <div class="comb" aria-hidden="true"></div>
+    <h1>This page is not here</h1>
+    <p>The address may be mistyped, or the page may have been moved. Everything about the salon is on the home page.</p>
+    <div class="actions">
+      <a class="btn btn--solid" id="home-link" href="index.html">Go to the home page</a>
+      <a class="btn" href="tel:+919027156238">Call +91 90271 56238</a>
+    </div>
+  </main>
+
+  <!-- On the live site the home page is the top of the site, whatever address led here.
+       Opened from the disk, the link stays as index.html in the same folder. -->
+  <script>
+  (function () {
+    var link = document.getElementById('home-link');
+    if (link && location.protocol.indexOf('http') === 0) link.href = location.origin;
+  })();
+  </script>
+</body>
+</html>

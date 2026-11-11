@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+.claude/settings.local.json
+
+# Next.js: made by "npm install" and "next build". Vercel makes its own; never upload these.
+node_modules/
+.next/
+out/
+.vercel/
+next-env.d.ts

@@ -1,0 +1,2 @@
+This folder belongs to the earlier plain-HTML version of the site, which is not published.
+Photos for the live site go in public/photos/ (see docs/PHOTOS.md).

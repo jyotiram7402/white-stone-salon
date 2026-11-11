@@ -1,0 +1,3 @@
+# White Stone Salon. Every page may be crawled: nothing is disallowed.
+User-agent: *
+Disallow:

@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>White Stone Salon | Unisex salon in Kharadi, Pune</title>
+  <meta name="description" content="Haircuts, beard trims, facials, waxing, threading and make-up at White Stone Salon on Fountain Road, Kharadi, Pune. Book on WhatsApp or call +91 90271 56238.">
+  <meta name="theme-color" content="#F1F2EF">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts: Marcellus (display) and Hanken Grotesk (text). Both verified on Google Fonts. Do not change this link. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&amp;family=Marcellus&amp;display=swap">
+
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <!-- Start-up guard (tested). Keep it inline, in the head, exactly as written.
+       It hides the hero text for the opening sequence only when motion is allowed and the
+       sequence has not played in this browser session, and it always un-hides the text
+       after 2.5 seconds if the animation library is slow or blocked. -->
+  <script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem('ws-intro') === '1'; } catch (e) {}
+    if (!reduce && !seen) {
+      d.classList.add('intro-pending');
+      window.__introTimer = setTimeout(function () {
+        d.classList.remove('intro-pending');
+        window.__introSkipped = true;
+      }, 2500);
+    }
+  })();
+  </script>
+
+  <!-- Animation library: GSAP 3.15.0, pinned. Do not change the version, the order, or add files. -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <!-- Smooth wheel scrolling on desktop: Lenis 1.3.27, pinned. The page works the same without it. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+  <script defer src="assets/js/site.js"></script>
+
+  <!-- For search engines: name, address and telephone only. Add hours and rating when the owner confirms them. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "White Stone Salon",
+    "telephone": "+919027156238",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Shop No. 13, Xenia Society, Fountain Road, opp. Cheryl Society, Downtown, Kharadi",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "postalCode": "411014",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Opening curtain. On screen only on the first visit of a browser session, when motion is allowed
+       (the head script decides). site.js lifts it; the head script removes it if the library is slow. -->
+  <div class="curtain" aria-hidden="true">
+    <span class="curtain__comb"></span>
+    <p class="curtain__mark">White Stone Salon</p>
+  </div>
+
+  <!-- How far down the page the visitor is. Drawn by site.js. -->
+  <div class="progress" aria-hidden="true"><span class="progress__bar" id="progress-bar"></span></div>
+
+  <!-- Icons. One 24px grid, one stroke width (set in site.css). Used with <use href="#i-name">. -->
+  <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.1 5h2.3l1.3 3.6-1.7 1.2a11.5 11.5 0 0 0 5.2 5.2l1.2-1.7 3.6 1.3v2.3a2 2 0 0 1-2.2 2A15.4 15.4 0 0 1 5.1 7.2a2 2 0 0 1 2-2.2z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 0-6.9 12L4 20l4.2-1.1A8 8 0 1 0 12 4z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-5.6 6.5-11a6.5 6.5 0 0 0-13 0c0 5.4 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.8v5M12 16.2v.1"/></symbol>
+  </svg>
+
+  <!-- ============ 1. Header ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__in">
+      <a class="wordmark" href="#top">White Stone Salon</a>
+      <nav class="site-nav" aria-label="Sections">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#artists">Artists</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--book site-header__book" href="#book">Book</a>
+      <button class="menu-btn" type="button" id="menu-open" aria-expanded="false" aria-controls="site-menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <span>Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Full-screen menu for phones. Opened by #menu-open, closed by #menu-close, Escape or any link in it. -->
+  <div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu__top">
+      <span class="wordmark" aria-hidden="true">White Stone Salon</span>
+      <button class="menu-btn" type="button" id="menu-close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        <span>Close</span>
+      </button>
+    </div>
+    <div class="menu__body">
+      <nav aria-label="Sections">
+        <ul class="menu__links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#artists">Artists</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <div class="menu__foot">
+        <a class="btn btn--book" href="#book">Book an appointment</a>
+        <a class="menu__phone" href="tel:+919027156238">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+          +91 90271 56238
+        </a>
+        <address class="menu__address">Shop No. 13, Xenia Society, Fountain Road, opp. Cheryl Society, Downtown, Kharadi, Pune, Maharashtra 411014</address>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ 2. Hero ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__in">
+        <div class="hero__text">
+          <h1 id="hero-title" data-intro="lines">Hair, beard and skin care on Fountain Road, Kharadi</h1>
+          <p class="hero__line lead" data-intro="fade">A unisex salon opposite Cheryl Society. <span data-todo>Open till 10:30 pm</span></p>
+          <div class="hero__actions" data-intro="fade">
+            <a class="btn btn--book" href="#book">Book an appointment</a>
+            <a class="btn btn--line" href="tel:+919027156238">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+              Call<span class="wide-only"> +91 90271 56238</span>
+            </a>
+          </div>
+        </div>
+        <figure class="photo hero__photo" data-slot="hero"><img data-photo data-intro="settle" src="assets/photos/hero.jpg" width="1200" height="1500" alt="Inside White Stone Salon" fetchpriority="high"></figure>
+      </div>
+    </section>
+
+    <!-- ============ 3. Service band (repeats the menu, so hidden from screen readers) ============ -->
+    <!-- Two lines that slide opposite ways as the page scrolls. data-slide is how far, in percent of the line's
+         own width; a negative number slides to the right. The second line starts pulled to the left by its wrapper. -->
+    <div class="band" aria-hidden="true">
+      <p class="band__line" data-slide="22">
+        <span>Haircut</span><span>Hairstyling</span><span>Balayage</span><span>Shampoo &amp; conditioning</span><span>Beard trimming</span><span>Shaving</span><span>Pedicure</span><span>Massage</span><span>Facials</span><span>Make-up</span><span>Waxing</span><span>Body waxing</span><span>Brazilian waxing</span><span>Eyebrow threading</span><span>Hair threading</span>
+      </p>
+      <div class="band__back">
+        <p class="band__line band__line--outline" data-slide="-22">
+          <span>Massage</span><span>Beard trimming</span><span>Facials</span><span>Eyebrow threading</span><span>Haircut</span><span>Pedicure</span><span>Make-up</span><span>Balayage</span><span>Shaving</span><span>Waxing</span><span>Hairstyling</span><span>Hair threading</span><span>Body waxing</span><span>Shampoo &amp; conditioning</span><span>Brazilian waxing</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- ============ 4. Services menu ============ -->
+    <!-- A row: name, comb leader, price slot (empty until prices are confirmed), Add toggle.
+         data-add holds the service name exactly as it goes into the booking request. -->
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="services-title">Services</h2>
+          <p class="lead" data-rv="up">Add what you want, then book them together.</p>
+        </div>
+
+        <div class="menu-cols">
+          <div class="menu-col">
+
+            <details class="group" open>
+              <summary class="group__sum"><h3 class="group__name">Hair</h3><svg class="icon group__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+              <ul class="rows" data-panel data-rv="kids">
+                <li class="row">
+                  <span class="row__name">Haircut</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Haircut">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Haircut to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Hairstyling</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Hairstyling">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Hairstyling to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Balayage</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Balayage">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Balayage to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Shampoo &amp; conditioning</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Shampoo &amp; conditioning">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Shampoo &amp; conditioning to booking</span>
+                  </button>
+                </li>
+              </ul>
+            </details>
+
+            <details class="group" open>
+              <summary class="group__sum"><h3 class="group__name">Beard and shave</h3><svg class="icon group__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+              <ul class="rows" data-panel data-rv="kids">
+                <li class="row">
+                  <span class="row__name">Beard trimming</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Beard trimming">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Beard trimming to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Shaving</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Shaving">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Shaving to booking</span>
+                  </button>
+                </li>
+              </ul>
+            </details>
+
+            <details class="group" open>
+              <summary class="group__sum"><h3 class="group__name">Feet and massage</h3><svg class="icon group__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+              <ul class="rows" data-panel data-rv="kids">
+                <li class="row">
+                  <span class="row__name">Pedicure</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Pedicure">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Pedicure to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Massage</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Massage">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Massage to booking</span>
+                  </button>
+                </li>
+              </ul>
+            </details>
+
+          </div>
+          <div class="menu-col">
+
+            <details class="group" open>
+              <summary class="group__sum"><h3 class="group__name">Skin and make-up</h3><svg class="icon group__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+              <ul class="rows" data-panel data-rv="kids">
+                <li class="row">
+                  <span class="row__name">Facials</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Facials">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Facials to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Make-up</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Make-up">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Make-up to booking</span>
+                  </button>
+                </li>
+              </ul>
+            </details>
+
+            <details class="group" open>
+              <summary class="group__sum"><h3 class="group__name">Waxing and threading</h3><svg class="icon group__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+              <ul class="rows" data-panel data-rv="kids">
+                <li class="row">
+                  <span class="row__name">Waxing</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Waxing">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Waxing to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Body waxing</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Body waxing">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Body waxing to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Brazilian waxing</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Brazilian waxing">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Brazilian waxing to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Eyebrow threading</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Eyebrow threading">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Eyebrow threading to booking</span>
+                  </button>
+                </li>
+                <li class="row">
+                  <span class="row__name">Hair threading</span><span class="comb" aria-hidden="true"></span><span class="row__price" data-price></span>
+                  <button class="add" type="button" aria-pressed="false" data-add="Hair threading">
+                    <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add</span>
+                    <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added</span>
+                    <span class="visually-hidden">Add Hair threading to booking</span>
+                  </button>
+                </li>
+              </ul>
+            </details>
+
+          </div>
+        </div>
+
+        <p class="services__note" data-rv="up"><span data-todo>Prices on request</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 5. Offers ============ -->
+    <!-- Three slots. When an offer is real: replace the three lines of text and delete data-todo from its <li>.
+         data-offer is only a number that tells the slots apart; the booking request uses the title text. -->
+    <section class="section offers" id="offers" aria-labelledby="offers-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="offers-title">Offers</h2>
+        </div>
+        <ul class="offers__list" data-rv="kids">
+          <li class="offer" data-todo>
+            <p class="offer__flag">Offer</p>
+            <h3 class="offer__title" id="offer-1-title">Offer title</h3>
+            <p class="offer__what">What it includes</p>
+            <p class="offer__till">Valid till</p>
+            <button class="add add--wide" type="button" aria-pressed="false" data-offer="1" aria-labelledby="offer-1-act offer-1-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added to booking</span>
+              <span class="visually-hidden" id="offer-1-act">Add to booking:</span>
+            </button>
+          </li>
+          <li class="offer" data-todo>
+            <p class="offer__flag">Offer</p>
+            <h3 class="offer__title" id="offer-2-title">Offer title</h3>
+            <p class="offer__what">What it includes</p>
+            <p class="offer__till">Valid till</p>
+            <button class="add add--wide" type="button" aria-pressed="false" data-offer="2" aria-labelledby="offer-2-act offer-2-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added to booking</span>
+              <span class="visually-hidden" id="offer-2-act">Add to booking:</span>
+            </button>
+          </li>
+          <li class="offer" data-todo>
+            <p class="offer__flag">Offer</p>
+            <h3 class="offer__title" id="offer-3-title">Offer title</h3>
+            <p class="offer__what">What it includes</p>
+            <p class="offer__till">Valid till</p>
+            <button class="add add--wide" type="button" aria-pressed="false" data-offer="3" aria-labelledby="offer-3-act offer-3-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Added to booking</span>
+              <span class="visually-hidden" id="offer-3-act">Add to booking:</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 6. Combos ============ -->
+    <!-- data-combo lists the services a combo adds, separated by | and spelled exactly as in the services menu. -->
+    <section class="section combos" id="combos" aria-labelledby="combos-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="combos-title">Combos</h2>
+          <p class="lead" data-rv="up">Services that go together in one visit.</p>
+        </div>
+        <ul class="combos__list" data-rv="kids">
+          <li class="combo" data-todo>
+            <h3 class="combo__name" id="combo-1-title">Cut and beard</h3>
+            <ul class="combo__items">
+              <li class="chip">Haircut</li>
+              <li class="chip">Beard trimming</li>
+            </ul>
+            <button class="add add--wide" type="button" aria-pressed="false" data-combo="Haircut|Beard trimming" aria-labelledby="combo-1-act combo-1-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add combo to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Combo added</span>
+              <span class="visually-hidden" id="combo-1-act">Add combo to booking:</span>
+            </button>
+          </li>
+          <li class="combo" data-todo>
+            <h3 class="combo__name" id="combo-2-title">Wash, cut and style</h3>
+            <ul class="combo__items">
+              <li class="chip">Shampoo &amp; conditioning</li>
+              <li class="chip">Haircut</li>
+              <li class="chip">Hairstyling</li>
+            </ul>
+            <button class="add add--wide" type="button" aria-pressed="false" data-combo="Shampoo &amp; conditioning|Haircut|Hairstyling" aria-labelledby="combo-2-act combo-2-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add combo to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Combo added</span>
+              <span class="visually-hidden" id="combo-2-act">Add combo to booking:</span>
+            </button>
+          </li>
+          <li class="combo" data-todo>
+            <h3 class="combo__name" id="combo-3-title">Facial and threading</h3>
+            <ul class="combo__items">
+              <li class="chip">Facials</li>
+              <li class="chip">Eyebrow threading</li>
+            </ul>
+            <button class="add add--wide" type="button" aria-pressed="false" data-combo="Facials|Eyebrow threading" aria-labelledby="combo-3-act combo-3-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add combo to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Combo added</span>
+              <span class="visually-hidden" id="combo-3-act">Add combo to booking:</span>
+            </button>
+          </li>
+          <li class="combo" data-todo>
+            <h3 class="combo__name" id="combo-4-title">Occasion ready</h3>
+            <ul class="combo__items">
+              <li class="chip">Make-up</li>
+              <li class="chip">Hairstyling</li>
+            </ul>
+            <button class="add add--wide" type="button" aria-pressed="false" data-combo="Make-up|Hairstyling" aria-labelledby="combo-4-act combo-4-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add combo to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Combo added</span>
+              <span class="visually-hidden" id="combo-4-act">Add combo to booking:</span>
+            </button>
+          </li>
+          <li class="combo" data-todo>
+            <h3 class="combo__name" id="combo-5-title">Feet and shoulders</h3>
+            <ul class="combo__items">
+              <li class="chip">Pedicure</li>
+              <li class="chip">Massage</li>
+            </ul>
+            <button class="add add--wide" type="button" aria-pressed="false" data-combo="Pedicure|Massage" aria-labelledby="combo-5-act combo-5-title">
+              <span class="add__face add__face--off" aria-hidden="true"><svg class="icon"><use href="#i-plus"></use></svg>Add combo to booking</span>
+              <span class="add__face add__face--on" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg>Combo added</span>
+              <span class="visually-hidden" id="combo-5-act">Add combo to booking:</span>
+            </button>
+          </li>
+        </ul>
+        <p class="combos__own" data-rv="up">Or build your own: <a href="#services">add any services from the menu</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ 7. Artists ============ -->
+    <!-- Two to six artists. To add one, copy a whole <li class="artist">, change the three numbers in it
+         (artist-4 in data-slot, src and the ids; 4 in data-artist) and put the photo in assets/photos. -->
+    <section class="section section--ruled artists" id="artists" aria-labelledby="artists-title">
+      <div class="wrap">
+        <div class="section__head section__head--row">
+          <h2 data-rv="lines" id="artists-title">Artists</h2>
+          <div class="scroller-nav">
+            <button class="icon-btn" type="button" id="artists-prev" aria-label="Previous artists" disabled>
+              <svg class="icon" aria-hidden="true"><use href="#i-left"></use></svg>
+            </button>
+            <button class="icon-btn" type="button" id="artists-next" aria-label="More artists" disabled>
+              <svg class="icon" aria-hidden="true"><use href="#i-right"></use></svg>
+            </button>
+          </div>
+        </div>
+        <ul class="artists__track" id="artists-track" data-rv="kids">
+        <li class="artist">
+          <figure class="photo artist__photo" data-rv="photo" data-slot="artist-1" data-todo><img data-photo src="assets/photos/artist-1.jpg" width="800" height="1000" alt="Portrait of a hair artist at White Stone Salon" loading="lazy" decoding="async"></figure>
+          <h3 class="artist__name" id="artist-1-name" data-todo>Artist name</h3>
+          <p class="artist__role" data-todo>Speciality</p>
+          <a class="btn btn--line" href="#book" data-artist="1" id="artist-1-act" aria-labelledby="artist-1-act artist-1-name">Book with this artist</a>
+        </li>
+        <li class="artist">
+          <figure class="photo artist__photo" data-rv="photo" data-slot="artist-2" data-todo><img data-photo src="assets/photos/artist-2.jpg" width="800" height="1000" alt="Portrait of a hair artist at White Stone Salon" loading="lazy" decoding="async"></figure>
+          <h3 class="artist__name" id="artist-2-name" data-todo>Artist name</h3>
+          <p class="artist__role" data-todo>Speciality</p>
+          <a class="btn btn--line" href="#book" data-artist="2" id="artist-2-act" aria-labelledby="artist-2-act artist-2-name">Book with this artist</a>
+        </li>
+        <li class="artist">
+          <figure class="photo artist__photo" data-rv="photo" data-slot="artist-3" data-todo><img data-photo src="assets/photos/artist-3.jpg" width="800" height="1000" alt="Portrait of a hair artist at White Stone Salon" loading="lazy" decoding="async"></figure>
+          <h3 class="artist__name" id="artist-3-name" data-todo>Artist name</h3>
+          <p class="artist__role" data-todo>Speciality</p>
+          <a class="btn btn--line" href="#book" data-artist="3" id="artist-3-act" aria-labelledby="artist-3-act artist-3-name">Book with this artist</a>
+        </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 8. Gallery ============ -->
+    <!-- The button lies over its photo and opens the lightbox. The lightbox loads assets/photos/<data-slot>.jpg. -->
+    <section class="section section--ruled gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="gallery-title">Gallery</h2>
+        </div>
+        <ul class="gallery__grid" id="gallery-grid">
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-1"><img data-photo src="assets/photos/gallery-1.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 1" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 1 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-2"><img data-photo src="assets/photos/gallery-2.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 2" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 2 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-3"><img data-photo src="assets/photos/gallery-3.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 3" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 3 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-4"><img data-photo src="assets/photos/gallery-4.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 4" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 4 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-5"><img data-photo src="assets/photos/gallery-5.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 5" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 5 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-6"><img data-photo src="assets/photos/gallery-6.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 6" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 6 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-7"><img data-photo src="assets/photos/gallery-7.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 7" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 7 of 8 larger"></button>
+          </li>
+          <li class="gallery__item">
+            <figure class="photo" data-rv="photo" data-slot="gallery-8"><img data-photo src="assets/photos/gallery-8.jpg" width="900" height="1125" alt="Work from White Stone Salon, photo 8" loading="lazy" decoding="async"></figure>
+            <button class="gallery__open" type="button" aria-label="View photo 8 of 8 larger"></button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 9. Reviews ============ -->
+    <!-- No rating and no quotes until the owner confirms them. -->
+    <section class="section section--ruled reviews" id="reviews" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="reviews-title">Reviews</h2>
+          <p class="lead" data-rv="up">Customers review the salon on its Google listing.</p>
+        </div>
+        <p data-rv="up"><a class="btn btn--line" data-todo href="https://www.google.com/maps/search/?api=1&amp;query=White%20Stone%20Unisex%20Salon%2C%20Fountain%20Road%2C%20Kharadi%2C%20Pune%20411014" target="_blank" rel="noopener">Read our reviews on Google<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ 10. Booking ============ -->
+    <!-- data-open and data-close set the first and last hour offered. 10:00 is a guess until the owner confirms hours.
+         data-whatsapp is the number the request goes to: country code and number, digits only. -->
+    <section class="book on-slate" id="book" aria-labelledby="book-title">
+      <div class="wrap book__in">
+        <div class="book__intro">
+          <h2 data-rv="lines" id="book-title">Book an appointment</h2>
+          <p class="lead" data-rv="up">Pick your services, a day and a time. The request goes to the salon on WhatsApp.</p>
+          <p class="book__alt" data-rv="up">Rather talk? <a href="tel:+919027156238">Call +91 90271 56238</a></p>
+        </div>
+
+        <div class="sheet" data-rv="up">
+          <noscript><p class="sheet__noscript">This form needs JavaScript, which is switched off in your browser. Call +91 90271 56238 to book.</p></noscript>
+
+          <form class="form" id="booking-form" method="dialog" novalidate data-open="10:00" data-close="22:30" data-whatsapp="919027156238">
+            <p class="form__status" id="form-status" role="alert"></p>
+            <p class="form__note">Every field is needed unless it says optional.</p>
+
+            <div class="field">
+              <p class="field__label" id="chips-label">Services</p>
+              <ul class="chips" id="chips" aria-labelledby="chips-label"></ul>
+              <p class="field__hint" id="chips-empty">Nothing added yet. Choose from the list below, or tap Add in the services menu.</p>
+              <label class="visually-hidden" for="service-add">Add a service</label>
+              <div class="control control--select">
+                <select id="service-add" aria-describedby="services-error">
+                  <option value="">Add a service</option>
+                </select>
+              </div>
+              <p class="field__error" id="services-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="artist">Preferred artist <span class="field__opt">(optional)</span></label>
+              <div class="control control--select">
+                <select id="artist" name="artist">
+                  <option value="">No preference</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="field__label" for="date">Date</label>
+                <div class="control">
+                  <input type="date" id="date" name="date" required aria-describedby="date-error">
+                </div>
+                <p class="field__error" id="date-error" aria-live="polite"></p>
+              </div>
+
+              <div class="field" data-todo>
+                <label class="field__label" for="time">Time</label>
+                <div class="control control--select">
+                  <select id="time" name="time" required aria-describedby="time-error">
+                    <option value="">Choose a date first</option>
+                  </select>
+                </div>
+                <p class="field__hint" id="time-note" hidden>No times are left today. <button class="link-btn" type="button" id="time-tomorrow">Choose tomorrow</button></p>
+                <p class="field__error" id="time-error" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="name">Name</label>
+              <div class="control">
+                <input type="text" id="name" name="name" autocomplete="name" autocapitalize="words" spellcheck="false" required aria-describedby="name-error">
+              </div>
+              <p class="field__error" id="name-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="mobile">Mobile number</label>
+              <div class="control">
+                <input type="tel" id="mobile" name="mobile" inputmode="tel" autocomplete="tel" required aria-describedby="mobile-hint mobile-error">
+              </div>
+              <p class="field__hint" id="mobile-hint">A 10-digit Indian mobile number.</p>
+              <p class="field__error" id="mobile-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="note">Note <span class="field__opt">(optional)</span></label>
+              <div class="control">
+                <textarea id="note" name="note" rows="3" maxlength="200" aria-describedby="note-hint" data-lenis-prevent></textarea>
+              </div>
+              <p class="field__hint" id="note-hint">Up to 200 characters.</p>
+            </div>
+
+            <div class="form__send">
+              <button class="btn btn--book btn--big" type="submit">
+                <svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+                Send request on WhatsApp
+              </button>
+              <p class="form__fine">This sends a request, not a confirmed booking.</p>
+            </div>
+          </form>
+
+          <!-- Shown in place of the form after a valid request. -->
+          <div class="confirm" id="confirm" role="group" aria-labelledby="confirm-title" tabindex="-1" hidden>
+            <h3 class="confirm__title" id="confirm-title">One more step: press send in WhatsApp</h3>
+            <p>WhatsApp should now be open with your request. It is not sent until you press send there.</p>
+            <pre class="confirm__text" id="request-text"></pre>
+            <div class="confirm__actions">
+              <a class="btn btn--book" id="wa-again" href="https://wa.me/919027156238" target="_blank" rel="noopener">Open WhatsApp again<span class="visually-hidden"> (opens in a new tab)</span></a>
+              <button class="btn btn--line" type="button" id="copy-request">
+                <svg class="icon" aria-hidden="true"><use href="#i-copy"></use></svg>
+                Copy the request
+              </button>
+              <a class="btn btn--line" href="tel:+919027156238">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                Call +91 90271 56238
+              </a>
+            </div>
+            <p class="confirm__status" id="copy-status" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. Visit ============ -->
+    <section class="section visit" id="visit" aria-labelledby="visit-title">
+      <div class="wrap visit__in">
+        <h2 class="visit__title" data-rv="lines" id="visit-title">Visit</h2>
+        <figure class="photo visit__photo" data-rv="photo" data-slot="visit"><img data-photo data-drift="6" src="assets/photos/visit.jpg" width="1200" height="800" alt="The White Stone Salon shopfront on Fountain Road" loading="lazy" decoding="async"></figure>
+        <div class="visit__text">
+          <dl class="facts" data-rv="kids">
+            <div class="fact">
+              <dt>Address</dt>
+              <dd><address>Shop No. 13, Xenia Society, Fountain Road, opp. Cheryl Society, Downtown, Kharadi, Pune, Maharashtra 411014</address></dd>
+            </div>
+            <div class="fact">
+              <dt>Landmark</dt>
+              <dd>Opposite Cheryl Society</dd>
+            </div>
+            <div class="fact">
+              <dt>Hours</dt>
+              <dd><span data-todo>Open till 10:30 pm</span></dd>
+            </div>
+            <div class="fact">
+              <dt>Plus code</dt>
+              <dd>HW6V+7R Pune, Maharashtra</dd>
+            </div>
+            <div class="fact">
+              <dt>Phone</dt>
+              <dd><a href="tel:+919027156238">+91 90271 56238</a></dd>
+            </div>
+          </dl>
+          <div class="visit__actions" data-rv="up">
+            <a class="btn btn--solid" data-todo href="https://www.google.com/maps/search/?api=1&amp;query=White%20Stone%20Unisex%20Salon%2C%20Fountain%20Road%2C%20Kharadi%2C%20Pune%20411014" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+              Get directions<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+            <a class="btn btn--line" href="tel:+919027156238">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+              Call<span class="visually-hidden"> +91 90271 56238</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 12. Questions ============ -->
+    <!-- When an answer is confirmed: replace the sentence and delete data-todo from its <p>. -->
+    <section class="section section--ruled faq" id="questions" aria-labelledby="questions-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-rv="lines" id="questions-title">Questions</h2>
+        </div>
+        <div class="faq__list" data-rv="kids">
+          <details class="q">
+            <summary class="q__sum"><h3 class="q__text">Do you take walk-ins?</h3><svg class="icon q__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+            <div class="q__panel" data-panel><p data-todo>The salon has not given this answer yet. Call +91 90271 56238 to ask.</p></div>
+          </details>
+          <details class="q">
+            <summary class="q__sum"><h3 class="q__text">How can I pay?</h3><svg class="icon q__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+            <div class="q__panel" data-panel><p data-todo>The salon has not given this answer yet. Call +91 90271 56238 to ask.</p></div>
+          </details>
+          <details class="q">
+            <summary class="q__sum"><h3 class="q__text">Is there parking?</h3><svg class="icon q__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+            <div class="q__panel" data-panel><p data-todo>The salon has not given this answer yet. Call +91 90271 56238 to ask.</p></div>
+          </details>
+          <details class="q">
+            <summary class="q__sum"><h3 class="q__text">Do you cut children&rsquo;s hair?</h3><svg class="icon q__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+            <div class="q__panel" data-panel><p data-todo>The salon has not given this answer yet. Call +91 90271 56238 to ask.</p></div>
+          </details>
+          <details class="q">
+            <summary class="q__sum"><h3 class="q__text">Can I change or cancel a booking?</h3><svg class="icon q__chev" aria-hidden="true"><use href="#i-down"></use></svg></summary>
+            <div class="q__panel" data-panel><p data-todo>The salon has not given this answer yet. Call +91 90271 56238 to ask.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 13. Footer ============ -->
+  <footer class="site-footer on-slate">
+    <div class="wrap site-footer__in">
+      <p class="wordmark">White Stone Salon</p>
+      <nav class="site-footer__nav" aria-label="Footer">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#artists">Artists</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#visit">Visit</a></li>
+          <li><a href="#book">Book</a></li>
+        </ul>
+      </nav>
+      <div class="site-footer__contact">
+        <address>Shop No. 13, Xenia Society, Fountain Road, opp. Cheryl Society, Downtown, Kharadi, Pune, Maharashtra 411014</address>
+        <a href="tel:+919027156238">+91 90271 56238</a>
+      </div>
+      <p class="site-footer__legal">
+        <a href="privacy.html">Privacy</a>
+        <span>&copy; <span id="year">2026</span> White Stone Salon</span>
+      </p>
+    </div>
+    <!-- The name once more, large. It rises letter by letter as the page ends. -->
+    <p class="site-footer__big" aria-hidden="true">White Stone</p>
+  </footer>
+
+  <!-- Selected-services bar. Shown by site.js while one or more services are selected. -->
+  <aside class="picked on-slate" id="picked" aria-label="Selected services">
+    <p class="picked__count" id="picked-count">No services selected</p>
+    <a class="btn btn--book picked__go" href="#book">Book these</a>
+  </aside>
+
+  <!-- Bottom action bar (phones and tablets). Hidden by site.js while the booking form is on screen or a field has focus. -->
+  <nav class="actionbar" id="actionbar" aria-label="Quick actions">
+    <a class="actionbar__item actionbar__item--book" href="#book">
+      <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
+      Book
+    </a>
+    <a class="actionbar__item" href="tel:+919027156238">
+      <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+      Call
+    </a>
+    <a class="actionbar__item" data-todo href="https://wa.me/919027156238" target="_blank" rel="noopener">
+      <svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+      WhatsApp<span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+    <a class="actionbar__item" data-todo href="https://www.google.com/maps/search/?api=1&amp;query=White%20Stone%20Unisex%20Salon%2C%20Fountain%20Road%2C%20Kharadi%2C%20Pune%20411014" target="_blank" rel="noopener">
+      <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+      Directions<span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+  </nav>
+
+  <!-- Gallery lightbox. site.js puts the photo inside #lightbox-frame. -->
+  <dialog class="lightbox on-slate" id="lightbox" aria-label="Gallery photo">
+    <div class="lightbox__in">
+      <button class="icon-btn lightbox__close" type="button" id="lightbox-close" aria-label="Close photo">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+      <figure class="photo lightbox__frame" id="lightbox-frame" data-slot="gallery"></figure>
+      <div class="lightbox__bar">
+        <button class="icon-btn" type="button" id="lightbox-prev" aria-label="Previous photo">
+          <svg class="icon" aria-hidden="true"><use href="#i-left"></use></svg>
+        </button>
+        <p class="lightbox__count" id="lightbox-count" aria-live="polite"></p>
+        <button class="icon-btn" type="button" id="lightbox-next" aria-label="Next photo">
+          <svg class="icon" aria-hidden="true"><use href="#i-right"></use></svg>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- The "View" cursor that follows a mouse over gallery photos. Moved by site.js. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__in">View</span></div>
+
+  <!-- Spoken updates for screen readers ("2 services selected"). -->
+  <p class="visually-hidden" id="live" role="status"></p>
+</body>
+</html>
