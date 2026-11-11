@@ -1,6 +1,6 @@
 import { Icon } from './Icons';
 import Photo from './Photo';
-import { business, serviceColumns, prices, bandLines, offers, combos, artists, shown } from '../data/site';
+import { business, serviceColumns, prices, bandLines, offers, combos, artists, shown, has } from '../data/site';
 import { hero, gallery, styles, artistPhotos } from '../data/photos';
 
 // The sections from the hero down to the gallery, in the order of the page.
@@ -79,7 +79,8 @@ export function Band() {
 }
 
 /* ---------- 4. Services menu ---------- */
-// A row: name, comb leader, price slot (empty until prices are confirmed), Add toggle.
+// A row: name, price slot (empty until single-service prices are confirmed), Add toggle.
+// A hairline divides one row from the next. There is no leader line between the name and the button.
 export function Services() {
   return (
     <section className="section services" id="services" aria-labelledby="services-title">
@@ -102,7 +103,6 @@ export function Services() {
                     {group.services.map((name) => (
                       <li className="row" key={name}>
                         <span className="row__name">{name}</span>
-                        <span className="comb" aria-hidden="true" />
                         <span className="row__price" data-price="">{prices[name] || null}</span>
                         <button className="add" type="button" aria-pressed="false" data-add={name}>
                           <AddFaces off="Add" on="Added" />
@@ -117,7 +117,11 @@ export function Services() {
           ))}
         </div>
 
-        <p className="services__note" data-rv="up"><span data-todo="">Prices on request</span></p>
+        {/* The salon has sent package prices only. Delete the first sentence when every single price is in. */}
+        <p className="services__note" data-rv="up">
+          <span data-todo="">Prices for single services are on request.</span>
+          {has.offers && <>{' '}<a href="#offers">See the offers on men&rsquo;s packages</a>.</>}
+        </p>
       </div>
     </section>
   );
@@ -156,47 +160,13 @@ export function Styles() {
   );
 }
 
-/* ---------- 6. Offers ---------- */
-// Left out of the page while every offer is still a placeholder and the presentation view is on (app/page.jsx).
-export function Offers() {
-  return (
-    <section className="section offers" id="offers" aria-labelledby="offers-title">
-      <div className="wrap">
-        <div className="section__head">
-          <h2 data-rv="lines" id="offers-title">Offers</h2>
-        </div>
-        <ul className="offers__list" data-rv="kids">
-          {shown(offers).map((offer) => (
-            <li className="offer" key={offer.id} {...todoFlag(offer.todo)}>
-              <p className="offer__flag">Offer</p>
-              <h3 className="offer__title" id={'offer-' + offer.id + '-title'}>{offer.title}</h3>
-              <p className="offer__what">{offer.what}</p>
-              <p className="offer__till">{offer.till}</p>
-              <button
-                className="add add--wide"
-                type="button"
-                aria-pressed="false"
-                data-offer={offer.id}
-                aria-labelledby={'offer-' + offer.id + '-act offer-' + offer.id + '-title'}
-              >
-                <AddFaces off="Add to booking" on="Added to booking" />
-                <span className="visually-hidden" id={'offer-' + offer.id + '-act'}>Add to booking:</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- 7. Combos ---------- */
+/* ---------- 6. Combos ---------- */
 // data-combo lists the services a combo adds, separated by | and spelled exactly as in the services menu.
-// On wide screens a comb leader runs from the services to the button (app/next.css).
-// ruled: true gives the section the comb rule at its top. The page asks for it when Offers is left out.
-export function Combos({ ruled = false }) {
+// The last cell of the list invites people to build their own, so the two-column grid on wide screens
+// never ends with an empty corner.
+export function Combos() {
   return (
-    <section className={'section combos' + (ruled ? ' section--ruled' : '')} id="combos" aria-labelledby="combos-title">
+    <section className="section section--ruled combos" id="combos" aria-labelledby="combos-title">
       <div className="wrap">
         <div className="section__head">
           <h2 data-rv="lines" id="combos-title">Combos</h2>
@@ -209,7 +179,6 @@ export function Combos({ ruled = false }) {
               <ul className="combo__items">
                 {combo.services.map((name) => <li className="chip" key={name}>{name}</li>)}
               </ul>
-              <span className="comb" aria-hidden="true" />
               <button
                 className="add add--wide"
                 type="button"
@@ -222,8 +191,57 @@ export function Combos({ ruled = false }) {
               </button>
             </li>
           ))}
+          <li className="combo combo--own">
+            <p>Or build your own: <a href="#services">add any services from the menu</a>.</p>
+          </li>
         </ul>
-        <p className="combos__own" data-rv="up">Or build your own: <a href="#services">add any services from the menu</a>.</p>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- 7. Offers: the salon's men's packages ---------- */
+// A price list. Each row: the package, what is in it, the regular price struck through, the offer price
+// on a flag, and an Add toggle. From 1024px the rows run down two columns; --rows tells the stylesheet
+// how many rows a column holds.
+//
+// site.js names an offer in the booking request by the text of .offer__title, so the hidden price in
+// that heading is what makes the request read "Offer: Package 7 (Rs 1,149)". Keep it there.
+export function Offers() {
+  const list = shown(offers);
+  return (
+    <section className="section offers" id="offers" aria-labelledby="offers-title">
+      <div className="wrap">
+        <div className="section__head">
+          <h2 data-rv="lines" id="offers-title">Offers on men&rsquo;s packages</h2>
+          <p className="lead" data-rv="up">Add a package to your booking, or ask for it by its number at the salon.</p>
+        </div>
+        <ul className="offers__list" data-rv="kids" style={{ '--rows': Math.ceil(list.length / 2) }}>
+          {list.map((offer) => (
+            <li className="offer" key={offer.id} {...todoFlag(offer.todo)}>
+              <h3 className="offer__title" id={'offer-' + offer.id + '-title'}>
+                {offer.title}<span className="visually-hidden">{' (' + offer.now + ')'}</span>
+              </h3>
+              <p className="offer__what">{offer.items.join(', ')}</p>
+              <p className="offer__price">
+                <span className="visually-hidden">Regular price </span>
+                <s className="offer__was">{offer.was}</s>
+                <span className="visually-hidden">, offer price </span>
+                <span className="offer__now">{offer.now}</span>
+              </p>
+              <button
+                className="add"
+                type="button"
+                aria-pressed="false"
+                data-offer={offer.id}
+                aria-labelledby={'offer-' + offer.id + '-act offer-' + offer.id + '-title'}
+              >
+                <AddFaces off="Add" on="Added" />
+                <span className="visually-hidden" id={'offer-' + offer.id + '-act'}>Add to booking:</span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

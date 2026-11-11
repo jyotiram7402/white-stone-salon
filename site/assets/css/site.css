@@ -149,10 +149,9 @@ input, select, textarea { font-size: 1rem; }   /* 16px or more, so iOS does not 
   /* Slate with transparency: the two permitted shadows and the lightbox veil. Not new colours. */
   --shade: rgba(31, 45, 51, 0.16);
   --veil: rgba(31, 45, 51, 0.95);
-
-  /* The comb: teeth 1px wide, 6px apart, in the element's own text colour. */
-  --teeth: repeating-linear-gradient(to right, currentColor 0, currentColor 1px, transparent 1px, transparent 6px);
 }
+/* There is no comb (rows of small ticks) any more: the owner had every one removed on 11 November 2026.
+   Lines are plain and solid. Do not bring back a dotted, dashed or ticked line anywhere. */
 
 /* ---------- 2.2 Globals ---------- */
 [hidden] { display: none !important; }
@@ -199,26 +198,17 @@ summary::-webkit-details-marker { display: none; }
 .lead { font-size: 1.125rem; line-height: 1.5; color: var(--ash); max-width: 34rem; }
 .on-slate .lead { color: var(--mist); }
 
-/* The comb as a section divider: a spine with teeth under it. */
+/* A plain rule divides one section from the next. */
 .section--ruled { padding-top: 0; }
 .section--ruled > .wrap::before {
   content: "";
   display: block;
-  height: 0.875rem;
   margin-bottom: var(--section-pad);
-  border-top: 1px solid currentColor;
-  color: var(--line);
-  background: var(--teeth);
+  border-top: 1px solid var(--line);
 }
-
-/* The comb as a leader line between a service and its control. */
-.comb {
-  flex: 1 1 1.5rem;
-  min-width: 1.5rem;
-  height: 0.5rem;
-  color: var(--line);
-  background: var(--teeth);
-}
+/* The section after the pebble band of Offers needs no rule: the edge of the band divides them. */
+.offers + .section--ruled { padding-top: var(--section-pad); }
+.offers + .section--ruled > .wrap::before { display: none; }
 
 /* Icons: one grid, one stroke width. */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
@@ -457,13 +447,12 @@ summary::-webkit-details-marker { display: none; }
   white-space: nowrap;
 }
 .band__line span { display: inline-flex; align-items: center; }
-.band__line span + span::before {   /* three comb teeth between names */
+.band__line span + span::before {   /* one thin bar between names */
   content: "";
-  width: 13px;
+  width: 1px;
   height: 0.6em;
   margin-inline: 0.9em;
-  color: var(--slate);
-  background: var(--teeth);
+  background: var(--slate);
 }
 /* The second line starts pulled to the left, so it has room to slide right without showing its end. */
 .band__back { width: max-content; transform: translateX(-30%); }
@@ -492,11 +481,14 @@ summary::-webkit-details-marker { display: none; }
 .is-opening > [data-panel] { opacity: 0; transition: none; }
 
 .rows { padding-bottom: var(--s3); }
+/* A row: the name on the left; the price slot and the "Add" toggle on the right. A hairline between rows. */
 .row { display: flex; align-items: center; gap: var(--s3); min-height: 3.5rem; }
-.row__name { flex: 0 1 auto; min-width: 0; }
+.row + .row { border-top: 1px solid var(--pebble); }
+.row__name { flex: 1 1 auto; min-width: 0; }
 .row__price { flex: none; font-variant-numeric: tabular-nums; }
 .row__price:empty { display: none; }   /* the slot stays in the HTML; it takes space once a price is typed in */
 .services__note { margin-top: var(--s4); color: var(--ash); }
+.services__note a { color: var(--slate); }
 
 /* "Add" toggle. Both faces share one grid cell, so the width never changes when it flips. */
 .add {
@@ -572,42 +564,62 @@ summary::-webkit-details-marker { display: none; }
 .picked__count { font-weight: 500; font-variant-numeric: tabular-nums; }
 .picked__go { flex: none; min-height: var(--tap); padding-block: var(--s1); border-color: var(--marigold); white-space: nowrap; }
 
-/* ---------- 2.9 Offers: slips on a pebble band ---------- */
+/* ---------- 2.9 Offers: a price list on a pebble band ---------- */
+/* A row: the package's name, what is in it, the regular price struck through, the offer price on a
+   marigold flag, and an "Add" toggle. From 1024px the rows run down two columns (section 2.21). */
 .offers { background: var(--pebble); }
+.offers .lead { color: var(--slate); }   /* on pebble, slate text only */
+.offers__list { display: grid; padding-top: 1px; }
 .offer {
   display: grid;
-  justify-items: start;
-  gap: var(--s2);
-  padding-block: var(--s5);
-  border-top: 1px solid var(--slate);
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "title price" "what add";
+  align-items: start;
+  gap: var(--s2) var(--s4);
+  margin-top: -1px;   /* neighbours share one rule */
+  padding-block: var(--s4);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.offer:last-child { padding-bottom: 0; }
-.offer__flag {
-  margin-bottom: var(--s2);
-  padding: 0.125rem 0.625rem;
+.offer__title { grid-area: title; }
+.offer__what { grid-area: what; font-size: 0.9375rem; line-height: 1.45; }
+.offer__price {
+  grid-area: price;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.offer__was { font-size: 0.9375rem; }   /* an <s>: the regular price, struck through */
+.offer__now {
+  padding: 0.0625rem 0.5rem;
   border: 1.5px solid var(--slate);
   border-radius: 2px;
   background: var(--marigold);
-  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.5;
 }
-.offer__title { font-size: 1.25rem; }
-.offer .add { margin-top: var(--s3); }
+.offer .add { grid-area: add; justify-self: end; }
 @media (hover: hover) and (pointer: fine) {
   .offer .add[aria-pressed="false"]:hover { background: var(--stone); }
 }
 
 /* ---------- 2.10 Combos: a ledger ---------- */
-.combos__list { border-top: 1px solid var(--pebble); }
+.combos__list { padding-top: 1px; }
 .combo {
   display: grid;
   justify-items: start;
   gap: var(--s3);
+  margin-top: -1px;   /* neighbours share one rule */
   padding-block: var(--s5);
+  border-top: 1px solid var(--pebble);
   border-bottom: 1px solid var(--pebble);
 }
 .combo__items { display: flex; flex-wrap: wrap; gap: var(--s2); }
+/* The last cell of the list: "Or build your own". */
+.combo--own { color: var(--ash); }
+.combo--own a { color: var(--slate); }
 .chip {
   display: inline-flex;
   align-items: center;
@@ -993,12 +1005,9 @@ summary::-webkit-details-marker { display: none; }
   .hero__actions .btn--book { flex: 0 1 auto; }
   .hero__photo { margin-right: 0; border-radius: 2px; }
 
-  .offers__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .offer { padding: var(--s5) var(--s5) var(--s2) 0; }
-  .offer:last-child { padding-bottom: var(--s2); }
-  .offer + .offer { padding-left: var(--s5); border-left: 1px solid var(--slate); }
-
+  /* A combo in one line: name, services, button. */
   .combo { grid-template-columns: 13rem minmax(0, 1fr) auto; align-items: center; gap: var(--s5); padding-block: var(--s4); }
+  .combo--own { grid-template-columns: minmax(0, 1fr); }
 
   .gallery__grid { grid-template-columns: repeat(4, 1fr); gap: var(--s4); padding-bottom: 5rem; }
   .gallery__item:nth-child(even) { transform: translate3d(0, calc(3.5rem + var(--py, 0px)), 0); }
@@ -1038,6 +1047,31 @@ summary::-webkit-details-marker { display: none; }
   .menu-col { border-bottom: 1px solid var(--slate); }
   .group__sum { padding-right: 0; cursor: default; }
   .group__chev { display: none; }
+
+  /* Offers: two columns, read down the first and then down the second. --rows is how many rows a
+     column holds; the component sets it on the list (half the number of offers, rounded up). */
+  .offers__list {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(var(--rows, 6), auto);
+    column-gap: var(--s8);
+  }
+
+  /* Combos: two columns. In each cell the name and its services on the left, the button on the right,
+     so no row has a hole in its middle. The "build your own" cell takes the whole row when it would
+     otherwise start one. */
+  .combos__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s8); }
+  .combo {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name add" "items add";
+    align-content: center;
+    gap: var(--s2) var(--s5);
+  }
+  .combo__name { grid-area: name; }
+  .combo__items { grid-area: items; }
+  .combo .add { grid-area: add; }
+  .combo--own { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; }
+  .combo--own:nth-child(odd) { grid-column: 1 / -1; }
 
   .picked {
     left: max(var(--page-pad), calc((100vw - var(--wrap)) / 2));
@@ -1104,12 +1138,9 @@ summary::-webkit-details-marker { display: none; }
   color: var(--stone);
 }
 .curtain__mark { font-family: var(--font-display); font-size: clamp(2.25rem, 1.2rem + 5.2vw, 4.5rem); line-height: 1.05; }
-.curtain__comb {
+.curtain__comb {   /* a plain line above the name; the class keeps its old name because site.js draws it */
   width: min(100%, 22rem);
-  height: 0.875rem;
-  border-top: 1px solid currentColor;
-  color: var(--mist);
-  background: var(--teeth);
+  border-top: 1px solid var(--mist);
   transform-origin: left center;
 }
 .intro-pending .curtain__comb { transform: scaleX(0); }   /* drawn by site.js once the library is there */
@@ -1124,7 +1155,7 @@ html { scroll-padding-top: 4.75rem; }
 .site-header.is-away { transform: translateY(-101%); }
 main:focus-visible, main section:focus-visible { outline: none; }   /* a section a link has moved to is a place, not a control */
 
-/* Comb rules draw from the left when their section arrives. */
+/* Section rules draw from the left when their section arrives. */
 .motion .section--ruled > .wrap::before {
   transform: scaleX(0);
   transform-origin: left center;
@@ -1181,7 +1212,6 @@ main:focus-visible, main section:focus-visible { outline: none; }   /* a section
   .motion .cursor { display: block; }
   .motion .gallery__open { cursor: none; }
   .row:hover .row__name { transform: translateX(0.375rem); }
-  .row:hover .comb { color: var(--slate); }
   .gallery__item:hover .photo img, .artist:hover .artist__photo img { transform: scale(1.05); }
   .site-nav a:hover { text-decoration: none; }
   .site-nav a:hover::after { transform: none; }

@@ -7,6 +7,8 @@ import { business, navLinks } from '../data/site';
 
 // Opening curtain. On screen only on the first visit of a browser session, when motion is allowed
 // (the start-up guard in app/layout.jsx decides). site.js lifts it.
+// .curtain__comb is now a plain line above the name. It keeps its old class name because site.js
+// draws it by that name.
 export function Curtain() {
   return (
     <div className="curtain" aria-hidden="true">

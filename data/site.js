@@ -21,9 +21,10 @@ export const business = {
 // How the site is shown while it is being finished. Two switches; each is  true  or  false.
 export const settings = {
   // workingView
-  //   false  The presentation view, for showing the salon. Offers, Artists and Questions leave out every
-  //          entry still marked  todo: true  (such an entry holds no content yet), and a section with
-  //          nothing left is left out, together with its link in the header. Nothing is outlined in red.
+  //   false  The presentation view, for showing the salon. Artists and Questions (and Offers, if one is
+  //          ever unconfirmed) leave out every entry still marked  todo: true  (such an entry holds no
+  //          content yet), and a section with nothing left is left out, together with its link in the
+  //          header. Nothing is outlined in red.
   //   true   The working view. Every empty slot is shown and every unconfirmed fact is outlined in red.
   //          Use it to see what the salon still has to send. docs/CONTENT-TODO.md lists the same things.
   workingView: false,
@@ -48,10 +49,11 @@ export const serviceColumns = [
   ]
 ];
 
-// Prices. Empty until the owner sends them: the page then shows no numbers and the line "Prices on request".
+// Prices of single services. Empty until the owner sends them (the poster of 11 November 2026 prices
+// packages only): the menu then shows no numbers and the line "Prices for single services are on request".
 // To add one, write the service name exactly as above and the price as it should read, for example
 //   'Haircut': 'Rs 000',
-// When every price is in, delete the "Prices on request" line in components/Sections.jsx.
+// When every price is in, delete that line in components/Sections.jsx.
 export const prices = {};
 
 // The sliding band under the hero: the fifteen names twice, in two orders.
@@ -60,12 +62,29 @@ export const bandLines = [
   ['Massage', 'Beard trimming', 'Facials', 'Eyebrow threading', 'Haircut', 'Pedicure', 'Make-up', 'Balayage', 'Shaving', 'Waxing', 'Hairstyling', 'Hair threading', 'Body waxing', 'Shampoo & conditioning', 'Brazilian waxing']
 ];
 
-// Offers: placeholders until the owner sends real ones. To show fewer, delete an entry.
-// When an offer is real, fill it in and delete its  todo: true.
+// Offers: the twelve men's packages on the salon's printed poster ("Offers on Mens Packages"),
+// sent as a photo on 11 November 2026.
+//   title   the package's number on the poster, which a customer can ask for at the salon
+//   items   what the package includes, in the poster's order
+//   was     the regular price (black on the poster)
+//   now     the offer price (red on the poster)
+// Spelling slips on the poster are corrected here; "Astha Berry" is as printed and still to be confirmed.
+// The poster gives no end date, so the page shows none.
+// To change a price, change it here. To end an offer, delete its line. To add one, add a line with the
+// next id. An offer that is not confirmed yet can carry  todo: true  like the other lists.
 export const offers = [
-  { id: 1, title: 'Offer title', what: 'What it includes', till: 'Valid till', todo: true },
-  { id: 2, title: 'Offer title', what: 'What it includes', till: 'Valid till', todo: true },
-  { id: 3, title: 'Offer title', what: 'What it includes', till: 'Valid till', todo: true }
+  { id: 1, title: 'Package 1', items: ['Haircut', 'Hair wash', 'Shaving', 'D-tan'], was: 'Rs 700', now: 'Rs 599' },
+  { id: 2, title: 'Package 2', items: ['Haircut', 'Hair wash', 'Shaving', 'Head and shoulder massage'], was: 'Rs 450', now: 'Rs 399' },
+  { id: 3, title: 'Package 3', items: ['Haircut', 'Hair wash', 'Shaving', 'Anti-tan facial'], was: 'Rs 1,500', now: 'Rs 1,199' },
+  { id: 4, title: 'Package 4', items: ['Haircut', 'Hair colour', 'Hair wash', 'Shaving', 'Head and shoulder massage'], was: 'Rs 1,199', now: 'Rs 999' },
+  { id: 5, title: 'Package 5', items: ['Haircut', 'Hair colour', 'Hair spa', 'Hair wash', 'Shaving'], was: 'Rs 1,799', now: 'Rs 1,599' },
+  { id: 6, title: 'Package 6', items: ['Haircut', 'Hair colour', 'Hair wash', 'Shaving', 'O3+ whitening facial'], was: 'Rs 3,399', now: 'Rs 2,999' },
+  { id: 7, title: 'Package 7', items: ['Haircut', 'Beard trimming or shaving', 'Hair wash', 'Head and shoulder massage', 'D-tan face clean-up (Ozone)'], was: 'Rs 1,400', now: 'Rs 1,149' },
+  { id: 8, title: 'Package 8', items: ['Beard trimming or shaving', 'Hair wash', 'Head and shoulder massage', 'D-tan face clean-up (O3+)'], was: 'Rs 1,500', now: 'Rs 1,399' },
+  { id: 9, title: 'Package 9', items: ['Haircut', 'Beard trimming or shaving', 'Hair wash', 'Facial (Astha Berry whitening)', 'Head and shoulder massage'], was: 'Rs 1,700', now: 'Rs 1,499' },
+  { id: 10, title: 'Package 10', items: ['Haircut', 'Beard trimming or shaving', 'Hair wash', 'Facial (Ozone)', 'Head and shoulder massage'], was: 'Rs 3,100', now: 'Rs 2,799' },
+  { id: 11, title: 'Package 11', items: ['Haircut', 'Beard trimming or shaving', 'Hair wash', 'Hair colour', 'Anti-dandruff treatment', 'Face clean-up (steam, scrub and massage)'], was: 'Rs 3,000', now: 'Rs 2,499' },
+  { id: 12, title: 'Package 12', items: ['Haircut', 'Beard trimming or shaving', 'Hair wash', 'Hair spa (L’Oréal)', 'Facial (Lotus Professional)'], was: 'Rs 2,600', now: 'Rs 2,299' }
 ];
 
 // Combos: suggested groupings, no prices. When the salon confirms one, delete its  todo: true.

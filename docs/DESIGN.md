@@ -440,3 +440,42 @@ Questions                            -------------------------------------------
 7. **The hero photo on tablets.** At 768px the photo was 275px wide beside a 59px headline. From 768 to 1023px the text and the photo now share the row equally.
 
 Checked against section 4 of `CLAUDE.md` and its list of signs of a generated page: no new colour, typeface, shadow or card; nothing centred; no label above a heading. The only device added is the comb, in the place it was made for.
+
+## 12. Later on 11 November 2026: the salon's packages, and no more tick lines
+
+The owner sent a photo of the salon's printed poster, "Offers on Mens Packages", and a screenshot of the comb rule, and asked for three things: show these prices and offers below Services and Combos; remove every dotted line; leave no blanks. Where this section disagrees with an earlier one (the comb in sections 1 and 5 to 8, the order in section 11, item 5 of section 11), this section is the current plan.
+
+### Offers: the twelve packages
+
+The poster lists twelve numbered packages for men. Each has what it includes, a price in black and a larger price in red, read here as the regular price and the offer price. They replace the three placeholder slots, so Offers is a real section in both views.
+
+- **Place.** Below Combos, as asked: Services, Styles, Combos, Offers, Artists, Gallery.
+- **Form.** A price list on the pebble band, not a grid of coloured tiles like the poster. Each row: the package's name ("Package 7": the salon's own number, which a customer can ask for at the counter), what is in it, the regular price struck through, the offer price on a marigold flag, and an "Add" toggle. From 1024px the rows run in two columns, 1 to 6 and 7 to 12, as on the two sheets of the poster.
+- **Words.** Spelling slips on the poster are corrected ("Sholder", "Whitning", "Anti ten"), and brand names are written the usual way (O3+, L'Oréal). "Astha Berry" is kept as printed, to be confirmed. Services use the menu's names where they are the same thing ("Haircut", "Shaving", "Beard trimming or shaving" for "Beard / Shaving").
+- **Booking.** Adding a package puts "Offer: Package 7 (Rs 1,149)" into the request, so the salon sees both the number and the price the visitor saw.
+- **Not on the poster, so not on the page:** an end date for the offers, and prices for single services. The services menu still says so, and now points to the packages.
+
+```
+390                                   1280
+Offers on men's packages              Offers on men's packages
+-------------------------------       ----------------------------------   ----------------------------------
+Package 1        Rs 700 [Rs 599]      Package 1        Rs 700 [Rs 599]     Package 7    Rs 1,400 [Rs 1,149]
+Haircut, Hair wash,     [+ Add]       Haircut, Hair wash,      [+ Add]     Haircut, Beard trimming   [+ Add]
+Shaving, D-tan                        Shaving, D-tan                       or shaving, Hair wash ...
+-------------------------------       ----------------------------------   ----------------------------------
+Package 2        Rs 450 [Rs 399]      Package 2 ...                        Package 8 ...
+```
+
+### The comb is removed
+
+The owner did not want the rows of small ticks. All of them are gone, and nothing dotted or dashed takes their place:
+
+- **Between sections:** a plain rule (the comb's spine without its teeth). It still draws from the left as the section arrives.
+- **Services rows:** no leader. A hairline between rows; the name on the left, the price slot and the "Add" toggle on the right.
+- **Combos rows:** no leader, which would have brought back the wide gap that item 5 of section 11 closed. So from 1024px Combos is two columns: in each cell the name and its services on the left and the button on the right. The line "Or build your own" becomes the last cell, so the grid has no empty corner.
+- **Service band:** one thin bar between names in place of three teeth.
+- **Opening curtain:** a plain line above the name.
+
+What still identifies the page: the stone and slate with one marigold, Marcellus cut large (the band, the footer name), and the stone surface in an empty frame.
+
+Checked against section 4 of `CLAUDE.md` and its list of signs of a generated page: the offers are a typeset list, not cards; the numbers are the salon's own package numbers, written as names, not markers on things that are not steps; the flags carry the salon's printed prices, not made-up figures; marigold stays on the booking action and the offer flags only.

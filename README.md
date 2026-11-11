@@ -49,7 +49,7 @@ docs/                     design plan, photo list, photo credits, missing conten
 ## Preview
 
 - **On Vercel.** A Next.js app cannot be opened by double-clicking a file. Each push to GitHub gets its own preview address on Vercel about a minute later. That is the real site.
-- **The earlier version, from the disk.** Double-click `site/index.html` in File Explorer so that it opens in Chrome or Edge. It has the same design and animation, without the Styles section and the sample photos. It is a reference, not what gets published.
+- **The earlier version, from the disk.** Double-click `site/index.html` in File Explorer so that it opens in Chrome or Edge. It is the first plain-HTML build: no Styles section, no sample photos, no packages, the old order of sections. It shares the stylesheet with the live site, which has moved on, so parts of it (Offers, Combos) no longer look right. It is a reference for the script, not what gets published. Judge the site on Vercel.
 - **Never judge either in the Claude app's Browser pane.** That pane shows a snapshot of one file without its stylesheet and script, so the page looks unstyled and nothing moves.
 - **On a machine where commands are allowed:** `npm install`, then `npm run dev`, then open the address it prints.
 
@@ -66,13 +66,13 @@ Almost everything is changed in the two files in `data/`.
 
 | To change | Do this |
 |---|---|
-| Which view the site shows | `workingView` in `settings`, near the top of `data/site.js`. `false` is the presentation view, for showing the salon: Offers, Artists and Questions are left out while they hold nothing real, and nothing is outlined in red. `true` is the working view: every empty slot is shown and every unconfirmed fact is outlined in red. |
+| Which view the site shows | `workingView` in `settings`, near the top of `data/site.js`. `false` is the presentation view, for showing the salon: Artists and Questions are left out while they hold nothing real, and nothing is outlined in red. `true` is the working view: every empty slot is shown and every unconfirmed fact is outlined in red. |
 | Whether Google may list the site | `listOnSearch` in the same `settings`. Leave it `false` until launch day; set it to `true` then. |
 | Phone, address, hours, Maps link, WhatsApp number | `business` at the top of `data/site.js`. The phone number also appears in the page description in `app/layout.jsx` and in the JSON-LD block at the bottom of `data/site.js`. |
 | Booking times | `bookingOpen` and `bookingClose` in `data/site.js` (24-hour, for example `'09:30'`). The last time offered is 30 minutes before closing. |
 | A service | `serviceColumns` in `data/site.js`. Change the same name in `bandLines`, and in any combo that uses it. |
-| A price | `prices` in `data/site.js`: the service name exactly as in the menu, then the price as it should read. When all are in, delete the "Prices on request" line in `components/Sections.jsx`. |
-| An offer | `offers` in `data/site.js`. Delete an entry to show fewer. When an offer is real, delete its `todo: true`: it then shows in both views, and the Offers section and its header link come back by themselves. |
+| The price of a single service | `prices` in `data/site.js`: the service name exactly as in the menu, then the price as it should read. When all are in, delete the sentence "Prices for single services are on request" in `components/Sections.jsx`. |
+| An offer (a men's package) | `offers` in `data/site.js`. Each line has the package's name (`title`), what it includes (`items`), the regular price (`was`) and the offer price (`now`). Change a price there; delete a line to end an offer; add a line with the next `id` for a new one. With no offers left, the section and its header link disappear by themselves. |
 | A combo | `combos` in `data/site.js`. Service names must be spelled exactly as in the menu. When the salon confirms one, delete its `todo: true`. |
 | An artist | `artists` in `data/site.js` and `artistPhotos` in `data/photos.js`, under the same `id`. Two to six artists work. When an artist is real, delete its `todo: true`. |
 | An answer | `questions` in `data/site.js`: replace `a: pendingAnswer` with the answer in quotes and delete `todo: true`. |
@@ -91,6 +91,7 @@ Whenever you fill in something that had a red outline, remove its `data-todo`.
 - Links between pages are plain `<a>` tags, not `next/link`: the script starts once per page load.
 - `site/assets/js/site.js` runs the whole page. The components only draw the markup it expects, so never rename an id, a class or a `data-` attribute in a component without changing the script.
 - Colours and timings come from the tokens at the top of `site.css`.
+- Lines are plain and solid. The owner had every dotted or ticked line removed; do not add one.
 - Whatever motion is added, the page must stay complete when the libraries have not loaded and still when the visitor prefers reduced motion.
 
 ## Before launch

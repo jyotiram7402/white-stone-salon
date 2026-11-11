@@ -2,8 +2,8 @@
 
 Standing instructions for every session in this project. Read all of it before doing anything.
 
-> **Changed on 11 November 2026, at the owner's request in chat, in three steps.**
-> First the site became animated throughout (section 6). Then it was rebuilt as a Next.js app that Vercel builds, with sample photos from Unsplash and a new Styles section (rules 1.2, 1.3, 1.5, 1.6 and 1.7, and sections 3, 5, 8, 9 and 10). Then, after a design review, it gained two switches in `data/site.js` (section 3), a new order of sections and a few changes of layout (sections 5 and 8). The history and the earlier rules are in `docs/DESIGN.md`, sections 9 to 11.
+> **Changed on 11 November 2026, at the owner's request in chat, in four steps.**
+> First the site became animated throughout (section 6). Then it was rebuilt as a Next.js app that Vercel builds, with sample photos from Unsplash and a new Styles section (rules 1.2, 1.3, 1.5, 1.6 and 1.7, and sections 3, 5, 8, 9 and 10). Then, after a design review, it gained two switches in `data/site.js` (section 3), a new order of sections and a few changes of layout (sections 5 and 8). Last, the owner sent the salon's poster of men's packages and asked for every tick line to go: Offers became a real price list, and the comb was taken out of the design (sections 2 to 6). The history and the earlier rules are in `docs/DESIGN.md`, sections 9 to 12.
 
 ## 1. Rules that never change
 
@@ -35,6 +35,7 @@ Standing instructions for every session in this project. Read all of it before d
   - Waxing and threading: Waxing, Body waxing, Brazilian waxing, Eyebrow threading, Hair threading
   - Feet and massage: Pedicure, Massage
 - Google's review topics for the salon include head massage, spa and beard, so give Massage and Beard trimming a prominent place. Do not add services that are not in the list.
+- **Offers:** twelve packages for men, numbered 1 to 12, from the salon's printed poster "Offers on Mens Packages" (photo sent on 11 November 2026). Each has what it includes, a regular price and an offer price. They are written in `offers` in `data/site.js`; use them exactly. A package may name a service that is not in the menu above (hair colour, hair spa, D-tan, facials by brand): that is the poster's wording and stays inside the package; it does not add a service to the menu. The poster gives no end date, so the page shows none.
 - **Visitors:** mostly people nearby on Android phones, arriving from Google Maps. They want to see what is offered, where it is, whether it is open, and to book, in under a minute.
 
 These facts are written once, in `data/site.js`.
@@ -56,8 +57,9 @@ The marks stay in the code in both views. Never delete a mark to make the page l
 |---|---|
 | Opening time and weekly hours | Show "Open till 10:30 pm" with `data-todo`. Build booking times from `data-open="10:00"` and `data-close="22:30"` on the form, and mark the time field `data-todo`. |
 | WhatsApp number | Assume +91 90271 56238 is on WhatsApp. List it in `docs/CONTENT-TODO.md`. |
-| Prices | Show no numbers. Each service row keeps an empty price slot. One line under the menu, "Prices on request", with `data-todo`. |
-| Offers | Three offer slots with placeholder text ("Offer title", "What it includes", "Valid till"), each `data-todo`. |
+| Prices of single services | Show no numbers. Each service row keeps an empty price slot. One line under the menu, "Prices for single services are on request", with `data-todo`, followed by a link to the offers. (Package prices are confirmed: section 2.) |
+| An end date for the offers | Show none. |
+| What the second number on the poster is for (85306 82828) | Leave it off the site. List it in `docs/CONTENT-TODO.md`. |
 | Combo offers | Show these five suggested groupings, no price, each `data-todo`: Cut and beard (Haircut, Beard trimming). Wash, cut and style (Shampoo & conditioning, Haircut, Hairstyling). Facial and threading (Facials, Eyebrow threading). Occasion ready (Make-up, Hairstyling). Feet and shoulders (Pedicure, Massage). |
 | Hair artists | Three slots: "Artist name", "Speciality", photo frame, each `data-todo`. The layout must work for two to six artists. |
 | Rating and reviews | No rating number and no quotes. (Two Google screenshots disagree: 4.4 from 172 reviews, and 5.0 from 50.) Show only a "Read our reviews on Google" link, as a row in Visit, with `data-todo`. There is no Reviews section until there are real quotes. |
@@ -70,11 +72,11 @@ The marks stay in the code in both views. Never delete a mark to make the page l
 
 ## 4. Design direction
 
-**The idea is the name.** White stone: honed marble and river pebbles. Cool, quiet, heavy. On it sits one warm colour from this place: marigold, the flower strung across shop fronts in Pune. The one memorable device is the comb: fine, evenly spaced vertical teeth, used as the leader line between a service and its control, and as the divider between sections. Nothing else is decoration, except the stone surface that stands in for a photo until the photo arrives.
+**The idea is the name.** White stone: honed marble and river pebbles. Cool, quiet, heavy. On it sits one warm colour from this place: marigold, the flower strung across shop fronts in Pune. Lines are plain and solid: a rule between sections, a hairline between rows. There is no comb (rows of small ticks) and no dotted or dashed line anywhere on the page: the owner had every one removed on 11 November 2026, so do not bring one back. Nothing is decoration, except the stone surface that stands in for a photo until the photo arrives.
 
 - **Colour.** Tokens are in `site.css`; use no other colours. The page is stone, text is slate. Ash is for secondary text on stone or chalk only. On pebble, use slate text only. Dark sections are slate with stone text and mist secondary text. Marigold is only for the booking action and offer flags, always with slate text; on a light surface give it a slate outline, because marigold on stone alone is too faint to read as a button.
 - **Type.** Marcellus for the wordmark, h1 and h2: its letters are modelled on Roman inscriptions cut in stone. It has one weight, so never bold and never italic. Hanken Grotesk for everything else: 400 for text, 500 for labels and buttons. Sentence case everywhere. Body text 16 to 18px, lines under 70 characters.
-- **Layout.** Mobile first: design at 360 to 430px wide, then adapt at 768, 1024 and 1280px. Text is left-aligned; no centred hero. Services are a typeset menu of rows with comb leaders, not a grid of cards. Give each section its own layout; do not repeat one card pattern down the page.
+- **Layout.** Mobile first: design at 360 to 430px wide, then adapt at 768, 1024 and 1280px. Text is left-aligned; no centred hero. Services and offers are typeset lists of rows divided by hairlines, not grids of cards. Give each section its own layout; do not repeat one card pattern down the page.
 - **Shape.** Photos have 2px corners, like cut stone. Buttons and fields 10px. Chips are pills. No shadows, except under the bottom action bar and open overlays.
 - **Photographs do the selling:** real photos of this salon, its people and their work, in tall 4:5 crops on phones.
 - **Words** are plain and specific, written for someone standing outside deciding whether to come in. A button says what it does ("Send request on WhatsApp", never "Submit"). No slogans.
@@ -87,11 +89,11 @@ One page, `app/page.jsx`, in this order:
 
 1. **Header.** Wordmark, links to Services, Styles, Offers, Artists, Gallery and Visit, and a "Book" button. On phones: wordmark and a menu button that opens a full-screen menu with large links, the phone number and the address. The links come from `navLinks` in `data/site.js`, which drops the link to a section that is left out.
 2. **Hero.** One tall photo (slot `hero`). An h1 that says what and where in plain words: "Hair, beard and skin care on Fountain Road, Kharadi". Keep "Fountain Road," on one line with the `nowrap` span, never with a non-breaking space: the library that splits the headline into lines ignores that space, and the headline would jump when the opening sequence ends. One line with the landmark ("Opposite Cheryl Society") and the closing time. Two actions: "Book an appointment" (goes to the booking form) and "Call". From 768 to 1023px the text and the photo share the row equally.
-3. **Service band.** Two lines of the fifteen service names that slide in opposite directions as the page scrolls. It repeats the menu, so hide it from screen readers.
-4. **Services menu.** The five groups. Each row: service name, comb leader, price slot, and an "Add" toggle that adds the service to the booking. Groups collapse on phones; two columns on desktop. When one or more services are selected, a slim bar shows "2 services selected" and "Book these".
+3. **Service band.** Two lines of the fifteen service names that slide in opposite directions as the page scrolls, with a thin bar between names. It repeats the menu, so hide it from screen readers.
+4. **Services menu.** The five groups. Each row: service name, price slot, and an "Add" toggle that adds the service to the booking, with a hairline between rows and no leader line. Groups collapse on phones; two columns on desktop. Under the menu, the line about single-service prices and a link to the offers. When one or more services are selected, a slim bar shows "2 services selected" and "Book these".
 5. **Styles.** Example cuts in three groups, Women, Men and Children: four tall photos each, with a short caption that describes the cut. The captions describe photos; they are not a price list and add no service. It follows Services so that photographs come early.
-6. **Offers.** Three slots that look clearly different from menu rows, each with a marigold flag and "Add to booking".
-7. **Combos.** The five groupings, each listing its services, with "Add combo to booking". From 1024px a comb leader runs from the services to the button. One line invites people to build their own from the menu. When Offers is left out, Combos takes the comb rule as its divider (`ruled` in `app/page.jsx`).
+6. **Combos.** The five groupings, each listing its services, with "Add combo to booking". The last cell of the list invites people to build their own from the menu. From 1024px the list is two columns, each cell with the name and services on the left and the button on the right, so that no row has a hole in its middle.
+7. **Offers.** The salon's twelve men's packages, below Combos, as a price list on a pebble band. Each row: the package's name ("Package 7", the salon's own number), what it includes, the regular price struck through, the offer price on a marigold flag, and an "Add" toggle. Two columns from 1024px, read down the first and then the second. Adding one puts "Offer: Package 7 (Rs 1,149)" in the booking request: `site.js` takes that from the text of `.offer__title`, which is why the heading carries the price in a visually hidden span. The section after Offers has no rule above it; the edge of the band divides them.
 8. **Artists.** A sideways scroller with scroll-snap: tall portraits (slots `artist-1` and up), name, speciality, and "Book with this artist", which fills the artist field. Previous and next buttons on desktop.
 9. **Gallery.** Eight photos (slots `gallery-1` to `gallery-8`) in an offset grid. A tap opens a `<dialog>` lightbox with previous, next, swipe and Escape.
 10. **Booking.** A dark slate section holding the form in section 7.
@@ -109,7 +111,7 @@ The site is animated throughout. It moves in five ways.
 
 1. **One opening sequence**, once per browser session: a slate curtain carrying the wordmark lifts, the hero headline rises line by line, the supporting line and the actions fade up, and the hero photo settles. In the markup: `data-intro="lines"` on the h1, `data-intro="fade"` on the supporting line and the actions, `data-intro="settle"` on the hero photo, and the `.curtain` element at the top of the body.
 2. **Motion tied directly to scrolling.** The service band (`data-slide` on each line, inside a band that hides overflow; a negative number slides the other way). Photo drift (`data-drift="6"` on an `<img>`, inside its `.photo` frame). The hero photo and the gallery columns moving at different speeds. The large wordmark rising in the footer. The progress line under the header.
-3. **Reveals, once, as content scrolls into view.** `data-rv="lines"`: a heading rises line by line. `data-rv="up"`: a block fades up. `data-rv="kids"`: the children of a list or grid follow one another. `data-rv="photo"`: a photo frame wipes open. Comb rules and comb leaders draw from the left.
+3. **Reveals, once, as content scrolls into view.** `data-rv="lines"`: a heading rises line by line. `data-rv="up"`: a block fades up. `data-rv="kids"`: the children of a list or grid follow one another. `data-rv="photo"`: a photo frame wipes open. The rule at the top of a section draws from the left.
 4. **Smooth wheel scrolling on desktop** (Lenis). Phones and tablets keep their own scrolling.
 5. **Everything a visitor operates answers with motion:** the menu overlay, "Add" toggles and the selected-services bar, collapsing groups, the artist scroller, the lightbox, the accordion, field focus and errors, the pressed state of buttons, the confirmation after sending, the action bar and the header hiding and showing. With a mouse: buttons fill, links underline, menu rows shift, and a "View" cursor follows the pointer over gallery photos.
 
@@ -176,12 +178,12 @@ package.json                   the five packages and the build scripts
 next.config.mjs                allows the sample photos' address
 app/layout.jsx                 the html shell: fonts, title, start-up guard, stylesheets
 app/page.jsx                   the page: the components in order
-app/next.css                   styles only this build needs (fonts, Styles, combo leaders, Questions, presentation view)
+app/next.css                   styles only this build needs (fonts, Styles, Questions, presentation view)
 app/privacy/page.jsx           the privacy note
 app/not-found.jsx              not-found page with a link home
 app/icon.svg                   the WS icon
 components/Chrome.jsx          header, phone menu, footer, the two bars, lightbox, curtain
-components/Sections.jsx        hero, band, services, styles, offers, combos, artists, gallery
+components/Sections.jsx        hero, band, services, styles, combos, offers, artists, gallery
 components/Booking.jsx         booking form, visit (with the reviews link), questions
 components/Photo.jsx           one photo frame
 components/Icons.jsx           the icon sprite

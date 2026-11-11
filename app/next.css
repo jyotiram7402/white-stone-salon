@@ -31,10 +31,6 @@ html:root {
 /* The note that says a section's photos are samples. */
 .sample-note { margin-top: var(--s5); color: var(--ash); }
 
-/* ---------- Combos: the comb leader between a combo's services and its button ---------- */
-/* Shown from 1024px, where the row has room for it. site.js draws it from the left with the row. */
-.combo .comb { display: none; }
-
 @media (hover: hover) and (pointer: fine) {
   .look:hover .photo img { transform: scale(1.05); }
 }
@@ -47,10 +43,6 @@ html:root {
 @media (min-width: 64em) {
   .styles__group { grid-template-columns: 12rem minmax(0, 1fr); }
   .styles__name { position: sticky; top: 6.5rem; align-self: start; }
-
-  /* name, services, leader, button */
-  .combos .combo { grid-template-columns: 13rem auto minmax(1.5rem, 1fr) auto; }
-  .combo .comb { display: block; justify-self: stretch; }
 
   /* Questions: the heading on the left, the list on the right, on the same split as Booking,
      so the list lines up under the booking sheet. */
