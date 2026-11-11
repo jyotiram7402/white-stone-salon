@@ -18,7 +18,8 @@ app/                      the pages
   icon.svg                the WS icon
 components/               the sections, as React components
 data/
-  site.js                 every fact and list on the page: phone, address, services, offers, combos, questions
+  site.js                 every fact and list on the page: phone, address, services, offers, combos, questions,
+                          and the two settings (which view to show; whether Google may list the site)
   photos.js               every photo
 public/photos/            the salon's own photos go here
 site/assets/css/site.css  the stylesheet
@@ -57,7 +58,7 @@ While looking at the site:
 - The opening curtain plays once per browser session. Close the tab and open the site again to see it again.
 - If Windows has "Animation effects" switched off (Settings, Accessibility, Visual effects), the browser reports that you prefer reduced motion and the site shows no animation. That is deliberate.
 - To see it as a phone does: press F12, click the phone-and-tablet icon (Ctrl+Shift+M in Chrome and Edge) and choose a width near 390.
-- Red dashed outlines mark what the owner has not confirmed, including every section that still shows sample photos. See "Before launch".
+- The site has two views, set by `workingView` in `data/site.js` (see "Edit"). As delivered it is in the presentation view: clean, for showing the salon. The working view adds every empty slot, and draws a red dashed outline round everything the owner has not confirmed, including every section that still shows sample photos. See "Before launch".
 
 ## Edit
 
@@ -65,14 +66,17 @@ Almost everything is changed in the two files in `data/`.
 
 | To change | Do this |
 |---|---|
+| Which view the site shows | `workingView` in `settings`, near the top of `data/site.js`. `false` is the presentation view, for showing the salon: Offers, Artists and Questions are left out while they hold nothing real, and nothing is outlined in red. `true` is the working view: every empty slot is shown and every unconfirmed fact is outlined in red. |
+| Whether Google may list the site | `listOnSearch` in the same `settings`. Leave it `false` until launch day; set it to `true` then. |
 | Phone, address, hours, Maps link, WhatsApp number | `business` at the top of `data/site.js`. The phone number also appears in the page description in `app/layout.jsx` and in the JSON-LD block at the bottom of `data/site.js`. |
 | Booking times | `bookingOpen` and `bookingClose` in `data/site.js` (24-hour, for example `'09:30'`). The last time offered is 30 minutes before closing. |
 | A service | `serviceColumns` in `data/site.js`. Change the same name in `bandLines`, and in any combo that uses it. |
 | A price | `prices` in `data/site.js`: the service name exactly as in the menu, then the price as it should read. When all are in, delete the "Prices on request" line in `components/Sections.jsx`. |
-| An offer | `offers` in `data/site.js`. Delete an entry to show fewer. When an offer is real, delete its `todo: true`. |
+| An offer | `offers` in `data/site.js`. Delete an entry to show fewer. When an offer is real, delete its `todo: true`: it then shows in both views, and the Offers section and its header link come back by themselves. |
 | A combo | `combos` in `data/site.js`. Service names must be spelled exactly as in the menu. When the salon confirms one, delete its `todo: true`. |
-| An artist | `artists` in `data/site.js` and `artistPhotos` in `data/photos.js`. Two to six artists work. |
+| An artist | `artists` in `data/site.js` and `artistPhotos` in `data/photos.js`, under the same `id`. Two to six artists work. When an artist is real, delete its `todo: true`. |
 | An answer | `questions` in `data/site.js`: replace `a: pendingAnswer` with the answer in quotes and delete `todo: true`. |
+| The reviews link | It is a row in Visit, in `components/Booking.jsx`, and uses the Maps link. A Reviews section of its own waits for real quotes. |
 | A photo | Put the file in `public/photos/` with the name and size in `docs/PHOTOS.md`. In `data/photos.js` set that entry's `src` to the local path, for example `src: '/photos/hero.jpg'`, and rewrite its `alt`. |
 | A style (the cuts for women, men, children) | `styles` in `data/photos.js`: the caption, the photo and its description. |
 | Motion on something new | Add one attribute to the element: `data-rv="lines"` (a heading rises line by line), `data-rv="up"` (a block fades up), `data-rv="kids"` (the items of a list follow one another) or `data-rv="photo"` (a photo frame wipes open). Never on a button or link itself; put it on the element around it. |
@@ -91,7 +95,8 @@ Whenever you fill in something that had a red outline, remove its `data-todo`.
 
 ## Before launch
 
-1. Search the project for `data-todo` and `todo: true`. None may be left. `docs/CONTENT-TODO.md` lists each one and what the owner has to send.
+1. Set `workingView: true` in `data/site.js` and look at the page: everything outlined in red is still unconfirmed. Then search the project for `data-todo` and `todo: true`. None may be left. `docs/CONTENT-TODO.md` lists each one and what the owner has to send.
 2. Every sample photo is replaced by the salon's own (`docs/PHOTOS.md`), no frame says "Photo needed", and every `alt` describes the real photo. Then delete the `remotePatterns` setting in `next.config.mjs`.
 3. Send yourself a test booking from a phone and check that it arrives on the salon's WhatsApp.
 4. When the site has its address, add it where `docs/CONTENT-TODO.md` says.
+5. Last of all, set `listOnSearch: true` in `data/site.js`. Until then every page asks search engines not to list the site, because it still shows unconfirmed content and photos of strangers.

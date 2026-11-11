@@ -981,10 +981,14 @@ summary::-webkit-details-marker { display: none; }
 /* ---------- 2.20 From 768px ---------- */
 @media (min-width: 48em) {
   body { font-size: 1.0625rem; }
+  /* From here the hero has two columns. At this size "Fountain Road," (6.7em, kept on one line)
+     and "Hair, beard and" (7em) always fit the text column: 44px at 768, 59px at 1024, 72px from 1252. */
+  h1 { font-size: clamp(2.75rem, 5.75vw, 4.5rem); }
   h3 { font-size: 1.25rem; }
   .section__head { margin-bottom: var(--s6); }
 
-  .hero__in { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; }
+  /* Text and photo share the row equally up to 1024px, where the text takes a little more. */
+  .hero__in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
   .hero__text { padding-bottom: var(--s5); }
   .hero__actions .btn--book { flex: 0 1 auto; }
   .hero__photo { margin-right: 0; border-radius: 2px; }

@@ -1,6 +1,6 @@
 import { Icon } from './Icons';
 import Photo from './Photo';
-import { business, questions } from '../data/site';
+import { business, questions, has, shown } from '../data/site';
 import { visit } from '../data/photos';
 
 // Booking, Visit and Questions.
@@ -53,7 +53,9 @@ export function Booking() {
               <p className="field__error" id="services-error" aria-live="polite" />
             </div>
 
-            <div className="field">
+            {/* Hidden while the Artists section is left out: the list would hold only "No preference".
+                The field stays in the form, so the script still finds it and the request still says so. */}
+            <div className="field" hidden={!has.artists}>
               <label className="field__label" htmlFor="artist">Preferred artist <span className="field__opt">(optional)</span></label>
               <div className="control control--select">
                 <select id="artist" name="artist">
@@ -172,6 +174,15 @@ export function Visit() {
               <dt>Phone</dt>
               <dd><a href={business.phoneHref}>{business.phoneDisplay}</a></dd>
             </div>
+            {/* Reviews: only this link until the salon supplies real quotes and a confirmed rating. */}
+            <div className="fact">
+              <dt>Reviews</dt>
+              <dd>
+                <a data-todo="" href={business.mapsHref} target="_blank" rel="noopener">
+                  Read our reviews on Google<span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              </dd>
+            </div>
           </dl>
           <div className="visit__actions" data-rv="up">
             <a className="btn btn--solid" data-todo="" href={business.mapsHref} target="_blank" rel="noopener">
@@ -191,28 +202,32 @@ export function Visit() {
 
 /* ---------- 12. Questions ---------- */
 // When an answer is confirmed: put it in data/site.js and remove  todo: true  from that question.
+// Left out of the page while every answer is still missing and the presentation view is on (app/page.jsx).
+// On wide screens the heading sits on the left and the list on the right (.faq__in in app/next.css).
 export function Questions() {
   return (
     <section className="section section--ruled faq" id="questions" aria-labelledby="questions-title">
       <div className="wrap">
-        <div className="section__head">
-          <h2 data-rv="lines" id="questions-title">Questions</h2>
-        </div>
-        <div className="faq__list" data-rv="kids">
-          {questions.map((item) => {
-            const flag = item.todo ? { 'data-todo': '' } : {};
-            return (
-              <details className="q" key={item.q}>
-                <summary className="q__sum">
-                  <h3 className="q__text">{item.q}</h3>
-                  <Icon name="down" className="q__chev" />
-                </summary>
-                <div className="q__panel" data-panel="">
-                  <p {...flag}>{item.a}</p>
-                </div>
-              </details>
-            );
-          })}
+        <div className="faq__in">
+          <div className="section__head">
+            <h2 data-rv="lines" id="questions-title">Questions</h2>
+          </div>
+          <div className="faq__list" data-rv="kids">
+            {shown(questions).map((item) => {
+              const flag = item.todo ? { 'data-todo': '' } : {};
+              return (
+                <details className="q" key={item.q}>
+                  <summary className="q__sum">
+                    <h3 className="q__text">{item.q}</h3>
+                    <Icon name="down" className="q__chev" />
+                  </summary>
+                  <div className="q__panel" data-panel="">
+                    <p {...flag}>{item.a}</p>
+                  </div>
+                </details>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

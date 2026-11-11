@@ -401,3 +401,42 @@ A ledger of three groups, like the combos: a label on the left, four tall photos
 ### Photos
 
 Sample photos come only from Unsplash's free collection, each one opened and looked at before it was used, and each listed in `docs/PHOTO-CREDITS.md`. They fill the hero, the gallery and Styles. The hero frame and a note under each of the other two carry `data-todo`, because a site for a real salon must not launch with strangers standing in for its work. The artists and the shopfront keep the stone surface: a stranger must not be shown as staff, and another shop must not be shown as this one. The Children group carries `data-todo` of its own, since the salon has not yet said whether it cuts children's hair.
+
+## 11. After the design review of 11 November 2026
+
+The page was drawn at 375, 768, 1024 and 1280px wide and looked at section by section. The design held; seven things changed. Where this section disagrees with an earlier one (5.6, 5.9, 5.12, and the place of Styles in section 10), this section is the current plan.
+
+1. **Search engines are asked to stay away until launch.** Vercel hides preview addresses from search engines, but not a project's main address. Until launch that page shows a real salon's name, address and phone beside placeholders and photos of strangers. `settings.listOnSearch` in `data/site.js` is `false` until launch day; while it is, every page carries a "noindex" instruction.
+
+2. **Two views of the page.** `settings.workingView` in `data/site.js`.
+   - `true`, the working view, is the page as it was: every empty slot is shown and every unconfirmed fact is outlined in red.
+   - `false`, the presentation view, is for showing the salon. Offers, Artists and Questions leave out each entry still marked `todo: true`, because such an entry holds no content ("Offer title"); when none is left, the section and its header link are left out too. The "Preferred artist" field is left out when no artist is shown. Nothing is outlined in red, and an empty photo frame shows the stone surface without the words "Photo needed".
+   - The marks stay in the code in both views, so nothing is forgotten. Combos and the Children group of Styles stay in both views: they are suggestions with real content, not empty slots.
+
+3. **Styles moves up, to follow Services.** On a phone about four screens of text and buttons lay between the hero photo and the next photograph, and photographs do the selling. The order is now Services, Styles, Offers, Combos, Artists, Gallery. When Offers is left out (presentation view), Combos takes the comb rule, so that two plain sections do not run together.
+
+4. **"Fountain Road" stays on one line in the headline.** It broke as "on Fountain / Road, Kharadi" at every width. The two words and their comma now sit in a span that does not wrap, and the headline reads "Hair, beard and / skin care on / Fountain Road, / Kharadi" on phones, tablets and desktops alike.
+   - A span, not a non-breaking space. Tried in a browser: SplitText, which splits the headline into lines for the opening sequence, treats a non-breaking space as an ordinary one. The headline would rise with the old break and jump to the new one when the sequence handed it back. With the span, the lines are the same before, during and after.
+   - Kept together, "Fountain Road," is 6.7em wide and "Hair, beard and" is 7em. At the old size they overflowed the text column at exactly 768 and 1024px, where the two-column hero is narrowest. So from 768px the headline is sized `clamp(2.75rem, 5.75vw, 4.5rem)`: 44px at 768, 59px at 1024, and the full 72px from 1252px. Below 768px the size is unchanged.
+
+5. **Combos get the comb leader on wide screens.** From 1024px a leader runs from a combo's services to its button, where there was a wide empty gap. It is the site's own device, doing the job it already does in the services menu.
+
+```
+1280
+Cut and beard         (Haircut) (Beard trimming) ||||||||||||||||||||||||||||  [ + Add combo to booking ]
+Wash, cut and style   (Shampoo & conditioning) (Haircut) (Hairstyling) ||||||  [ + Add combo to booking ]
+```
+
+6. **Questions and Reviews.** On desktop the Questions list used the left 60% of the page and the rest stood empty. From 1024px the heading sits on the left and the list on the right, on the same 5 to 7 split as Booking, so the list lines up under the booking sheet. Reviews was a whole section holding one button. Until there are real quotes, the link to the Google reviews is a row in the fact sheet in Visit, and there is no Reviews section. It returns when quotes arrive.
+
+```
+1280
+Questions                            ----------------------------------------------------
+                                     Do you take walk-ins?                              v
+                                     ----------------------------------------------------
+                                     How can I pay?                                     v
+```
+
+7. **The hero photo on tablets.** At 768px the photo was 275px wide beside a 59px headline. From 768 to 1023px the text and the photo now share the row equally.
+
+Checked against section 4 of `CLAUDE.md` and its list of signs of a generated page: no new colour, typeface, shadow or card; nothing centred; no label above a heading. The only device added is the comb, in the place it was made for.

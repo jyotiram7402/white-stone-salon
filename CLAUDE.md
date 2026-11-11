@@ -2,8 +2,8 @@
 
 Standing instructions for every session in this project. Read all of it before doing anything.
 
-> **Changed on 11 November 2026, at the owner's request in chat, in two steps.**
-> First the site became animated throughout (section 6). Then it was rebuilt as a Next.js app that Vercel builds, with sample photos from Unsplash and a new Styles section (rules 1.2, 1.3, 1.5, 1.6 and 1.7, and sections 3, 5, 8, 9 and 10). The history and the earlier rules are in `docs/DESIGN.md`, sections 9 and 10.
+> **Changed on 11 November 2026, at the owner's request in chat, in three steps.**
+> First the site became animated throughout (section 6). Then it was rebuilt as a Next.js app that Vercel builds, with sample photos from Unsplash and a new Styles section (rules 1.2, 1.3, 1.5, 1.6 and 1.7, and sections 3, 5, 8, 9 and 10). Then, after a design review, it gained two switches in `data/site.js` (section 3), a new order of sections and a few changes of layout (sections 5 and 8). The history and the earlier rules are in `docs/DESIGN.md`, sections 9 to 11.
 
 ## 1. Rules that never change
 
@@ -41,7 +41,16 @@ These facts are written once, in `data/site.js`.
 
 ## 3. Not yet provided, and what to show until it is
 
-Mark every unconfirmed fact with the attribute `data-todo` (the stylesheet outlines it in red). In JSX that is `data-todo=""`. Zero may remain at launch.
+Mark every unconfirmed fact with the attribute `data-todo`. In JSX that is `data-todo=""`; in the lists in `data/` it is `todo: true`. Zero may remain at launch.
+
+The page has two views, chosen by `settings.workingView` in `data/site.js`:
+
+- **Working view (`true`).** Everything in the table below is shown, and every mark is outlined in red.
+- **Presentation view (`false`),** for showing the salon. Offers, Artists and Questions leave out each entry still marked `todo: true`, because such an entry holds no content; a section with none left is left out, with its link in the header. The "Preferred artist" field is left out when no artist is shown. Nothing is outlined, and an empty photo frame shows the stone surface without words. Everything else in the table is shown as written.
+
+The marks stay in the code in both views. Never delete a mark to make the page look finished: confirm the fact, or switch the view.
+
+`settings.listOnSearch` stays `false` until launch day. While it is, every page asks search engines not to list the site.
 
 | Missing | Until the owner supplies it |
 |---|---|
@@ -51,7 +60,7 @@ Mark every unconfirmed fact with the attribute `data-todo` (the stylesheet outli
 | Offers | Three offer slots with placeholder text ("Offer title", "What it includes", "Valid till"), each `data-todo`. |
 | Combo offers | Show these five suggested groupings, no price, each `data-todo`: Cut and beard (Haircut, Beard trimming). Wash, cut and style (Shampoo & conditioning, Haircut, Hairstyling). Facial and threading (Facials, Eyebrow threading). Occasion ready (Make-up, Hairstyling). Feet and shoulders (Pedicure, Massage). |
 | Hair artists | Three slots: "Artist name", "Speciality", photo frame, each `data-todo`. The layout must work for two to six artists. |
-| Rating and reviews | No rating number and no quotes. (Two Google screenshots disagree: 4.4 from 172 reviews, and 5.0 from 50.) Show only a "Read our reviews on Google" link. |
+| Rating and reviews | No rating number and no quotes. (Two Google screenshots disagree: 4.4 from 172 reviews, and 5.0 from 50.) Show only a "Read our reviews on Google" link, as a row in Visit, with `data-todo`. There is no Reviews section until there are real quotes. |
 | Google Maps link | Use `https://www.google.com/maps/search/?api=1&query=White%20Stone%20Unisex%20Salon%2C%20Fountain%20Road%2C%20Kharadi%2C%20Pune%20411014` for directions and reviews, with `data-todo`. No embedded map. |
 | Answers to questions | Build the section with these questions and a `data-todo` answer each: Do you take walk-ins? How can I pay? Is there parking? Do you cut children's hair? Can I change or cancel a booking? |
 | Whether the salon cuts children's hair | The Children group in Styles carries `data-todo`. It is the same open question as above. |
@@ -76,20 +85,21 @@ Mark every unconfirmed fact with the attribute `data-todo` (the stylesheet outli
 
 One page, `app/page.jsx`, in this order:
 
-1. **Header.** Wordmark, links to Services, Offers, Styles, Artists, Gallery and Visit, and a "Book" button. On phones: wordmark and a menu button that opens a full-screen menu with large links, the phone number and the address.
-2. **Hero.** One tall photo (slot `hero`). An h1 that says what and where in plain words, for example "Hair, beard and skin care on Fountain Road, Kharadi". One line with the landmark ("Opposite Cheryl Society") and the closing time. Two actions: "Book an appointment" (goes to the booking form) and "Call".
+1. **Header.** Wordmark, links to Services, Styles, Offers, Artists, Gallery and Visit, and a "Book" button. On phones: wordmark and a menu button that opens a full-screen menu with large links, the phone number and the address. The links come from `navLinks` in `data/site.js`, which drops the link to a section that is left out.
+2. **Hero.** One tall photo (slot `hero`). An h1 that says what and where in plain words: "Hair, beard and skin care on Fountain Road, Kharadi". Keep "Fountain Road," on one line with the `nowrap` span, never with a non-breaking space: the library that splits the headline into lines ignores that space, and the headline would jump when the opening sequence ends. One line with the landmark ("Opposite Cheryl Society") and the closing time. Two actions: "Book an appointment" (goes to the booking form) and "Call". From 768 to 1023px the text and the photo share the row equally.
 3. **Service band.** Two lines of the fifteen service names that slide in opposite directions as the page scrolls. It repeats the menu, so hide it from screen readers.
 4. **Services menu.** The five groups. Each row: service name, comb leader, price slot, and an "Add" toggle that adds the service to the booking. Groups collapse on phones; two columns on desktop. When one or more services are selected, a slim bar shows "2 services selected" and "Book these".
-5. **Offers.** Three slots that look clearly different from menu rows, each with a marigold flag and "Add to booking".
-6. **Combos.** The five groupings, each listing its services, with "Add combo to booking". One line invites people to build their own from the menu.
-7. **Styles.** Example cuts in three groups, Women, Men and Children: four tall photos each, with a short caption that describes the cut. The captions describe photos; they are not a price list and add no service.
+5. **Styles.** Example cuts in three groups, Women, Men and Children: four tall photos each, with a short caption that describes the cut. The captions describe photos; they are not a price list and add no service. It follows Services so that photographs come early.
+6. **Offers.** Three slots that look clearly different from menu rows, each with a marigold flag and "Add to booking".
+7. **Combos.** The five groupings, each listing its services, with "Add combo to booking". From 1024px a comb leader runs from the services to the button. One line invites people to build their own from the menu. When Offers is left out, Combos takes the comb rule as its divider (`ruled` in `app/page.jsx`).
 8. **Artists.** A sideways scroller with scroll-snap: tall portraits (slots `artist-1` and up), name, speciality, and "Book with this artist", which fills the artist field. Previous and next buttons on desktop.
 9. **Gallery.** Eight photos (slots `gallery-1` to `gallery-8`) in an offset grid. A tap opens a `<dialog>` lightbox with previous, next, swipe and Escape.
-10. **Reviews.** A heading and the Google link. Nothing more until real quotes arrive.
-11. **Booking.** A dark slate section holding the form in section 7.
-12. **Visit.** Address, landmark, hours, "Get directions", "Call", and one photo of the shopfront (slot `visit`).
-13. **Questions.** An accordion.
-14. **Footer.** Wordmark, address, phone, section links, link to the privacy page, the year.
+10. **Booking.** A dark slate section holding the form in section 7.
+11. **Visit.** Address, landmark, hours, plus code, phone, the "Read our reviews on Google" link, "Get directions", "Call", and one photo of the shopfront (slot `visit`).
+12. **Questions.** An accordion. From 1024px the heading sits on the left and the list on the right, on the same split as Booking.
+13. **Footer.** Wordmark, address, phone, section links, link to the privacy page, the year.
+
+There is no Reviews section until the salon supplies real quotes and a confirmed rating. When it does, the section goes between Gallery and Booking.
 
 On phones, a **bottom action bar** stays fixed: Book, Call, WhatsApp, Directions. Four equal targets at least 44px tall, clear of the phone's safe area. The page reserves space for it. It hides while the booking form is on screen or a field has focus.
 
@@ -155,7 +165,7 @@ All of this is in `site/assets/js/site.js`. `components/Booking.jsx` only draws 
 
 - **Speed.** Every photo goes through `components/Photo.jsx` (which uses `next/image`) with its `width`, `height`, `alt` and `sizes`. The hero is the only one loaded eagerly, with high priority; it is covered only by the opening curtain. Nothing may shift the layout after it appears. Keep the stylesheets (`site.css` and `app/next.css` together) under 60 KB and `site.js` under 60 KB.
 - **Access (WCAG 2.2 AA).** Real landmarks, one h1, headings in order, a working skip link. Everything works by keyboard with a visible focus ring. Targets at least 44 by 44px. The menu and lightbox trap focus and close on Escape. Every field has a label. Errors are announced. Colour is never the only signal. Text survives 200% zoom.
-- **Search.** Keep the title and description (in `app/layout.jsx`). JSON-LD of type `HairSalon` with the name, address and telephone only (in `data/site.js`): no rating, no hours until they are confirmed.
+- **Search.** Keep the title and description (in `app/layout.jsx`). JSON-LD of type `HairSalon` with the name, address and telephone only (in `data/site.js`): no rating, no hours until they are confirmed. Until launch, `settings.listOnSearch` is `false` and every page carries a "noindex" instruction: Vercel hides preview addresses from search engines, but not a project's main address. `public/robots.txt` still allows everything, so that search engines can read that instruction.
 - **Browsers.** Chrome on Android, Safari on iOS 15 and later, Firefox, Edge. Anything newer than those support must fail quietly.
 - **Privacy page.** State only what is true: the site has no database and no accounts and stores nothing about visitors; it is hosted by Vercel, which sees each request as any host does; the booking draft stays in the visitor's browser until they send it through WhatsApp; fonts and scripts are served from the site itself; the sample photos are fetched from Unsplash by the host, not by the visitor's browser; there are no cookies and no analytics.
 
@@ -166,17 +176,17 @@ package.json                   the five packages and the build scripts
 next.config.mjs                allows the sample photos' address
 app/layout.jsx                 the html shell: fonts, title, start-up guard, stylesheets
 app/page.jsx                   the page: the components in order
-app/next.css                   styles only this build needs (fonts, Styles section)
+app/next.css                   styles only this build needs (fonts, Styles, combo leaders, Questions, presentation view)
 app/privacy/page.jsx           the privacy note
 app/not-found.jsx              not-found page with a link home
 app/icon.svg                   the WS icon
 components/Chrome.jsx          header, phone menu, footer, the two bars, lightbox, curtain
-components/Sections.jsx        hero, band, services, offers, combos, styles, artists, gallery, reviews
-components/Booking.jsx         booking form, visit, questions
+components/Sections.jsx        hero, band, services, styles, offers, combos, artists, gallery
+components/Booking.jsx         booking form, visit (with the reviews link), questions
 components/Photo.jsx           one photo frame
 components/Icons.jsx           the icon sprite
 components/SiteScript.jsx      loads GSAP and Lenis, then runs site.js
-data/site.js                   every fact and list on the page
+data/site.js                   every fact and list on the page, and the two settings (section 3)
 data/photos.js                 every photo
 public/photos/                 the salon's own photos
 public/robots.txt              allow everything
@@ -219,6 +229,7 @@ The README gives the Vercel settings: Framework Preset "Next.js", Root Directory
    - every photo has `width`, `height` and `alt`; every field has a label; ids are unique;
    - every control is a real `<button>`, `<a>`, `<input>`, `<select>`, `<details>` or `<dialog>`;
    - every missing fact is shown as section 3 says and listed in `docs/CONTENT-TODO.md`;
+   - the page is right in both views: read it once with `settings.workingView` as `true` and once as `false`;
    - nothing from the list of signs of a generated page crept in.
 6. Finish with a report: the files changed; every `data-todo` and where it is; what you could not verify without a build; what I should look at first on the Vercel preview.
 

@@ -1,4 +1,5 @@
 import { Marcellus, Hanken_Grotesk } from 'next/font/google';
+import { settings } from '../data/site';
 
 // The same stylesheet the plain-HTML version uses, then the few rules only this build needs.
 import '../site/assets/css/site.css';
@@ -11,7 +12,9 @@ const text = Hanken_Grotesk({ subsets: ['latin'], display: 'swap', variable: '--
 export const metadata = {
   title: 'White Stone Salon | Unisex salon in Kharadi, Pune',
   description:
-    'Haircuts, beard trims, facials, waxing, threading and make-up at White Stone Salon on Fountain Road, Kharadi, Pune. Book on WhatsApp or call +91 90271 56238.'
+    'Haircuts, beard trims, facials, waxing, threading and make-up at White Stone Salon on Fountain Road, Kharadi, Pune. Book on WhatsApp or call +91 90271 56238.',
+  // Until launch day (settings.listOnSearch in data/site.js), every page asks search engines not to list the site.
+  ...(settings.listOnSearch ? {} : { robots: { index: false, follow: false } })
 };
 
 export const viewport = {
@@ -32,10 +35,14 @@ const guard =
   "if(!reduce&&!seen){d.classList.add('intro-pending');" +
   "window.__introTimer=setTimeout(function(){d.classList.remove('intro-pending');window.__introSkipped=true;},2500);}})();";
 
+// "is-clean" is the presentation view (settings.workingView is false): app/next.css then draws no red
+// outlines and no "Photo needed" words.
+const view = settings.workingView ? '' : ' is-clean';
+
 export default function RootLayout({ children }) {
   return (
     // suppressHydrationWarning: the guard adds classes to <html> before React starts, which is intended.
-    <html lang="en-IN" className={display.variable + ' ' + text.variable} suppressHydrationWarning>
+    <html lang="en-IN" className={display.variable + ' ' + text.variable + view} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: guard }} />
       </head>

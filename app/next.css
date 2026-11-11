@@ -1,12 +1,17 @@
 /* White Stone Salon: rules only the Next.js build needs.
-   Everything else is in site/assets/css/site.css, which this file follows. Use only that file's tokens. */
+   Everything else is in site/assets/css/site.css, which this file follows. Use only that file's tokens.
+   Where a rule here replaces one in site.css, its selector is the more specific of the two, so the
+   result does not depend on which file the browser reads first. */
 
 /* Fonts. next/font serves Marcellus and Hanken Grotesk from the site itself and hands them over as
    two custom properties on <html>. The fallbacks are the ones site.css lists. */
-:root {
+html:root {
   --font-display: var(--font-marcellus), "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --font-text: var(--font-hanken), "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* Words that must stay on one line: the street name in the headline. */
+.nowrap { white-space: nowrap; }
 
 /* ---------- Styles: example cuts for women, men and children ---------- */
 /* A ledger of three groups. Each is a label and a row of tall photos with a caption under each. */
@@ -23,6 +28,13 @@
 .look .photo img { transition: transform var(--t-slow) var(--ease-out); }
 .styles__note { padding-top: var(--s5); border-top: 1px solid var(--slate); color: var(--ash); }
 
+/* The note that says a section's photos are samples. */
+.sample-note { margin-top: var(--s5); color: var(--ash); }
+
+/* ---------- Combos: the comb leader between a combo's services and its button ---------- */
+/* Shown from 1024px, where the row has room for it. site.js draws it from the left with the row. */
+.combo .comb { display: none; }
+
 @media (hover: hover) and (pointer: fine) {
   .look:hover .photo img { transform: scale(1.05); }
 }
@@ -35,7 +47,29 @@
 @media (min-width: 64em) {
   .styles__group { grid-template-columns: 12rem minmax(0, 1fr); }
   .styles__name { position: sticky; top: 6.5rem; align-self: start; }
+
+  /* name, services, leader, button */
+  .combos .combo { grid-template-columns: 13rem auto minmax(1.5rem, 1fr) auto; }
+  .combo .comb { display: block; justify-self: stretch; }
+
+  /* Questions: the heading on the left, the list on the right, on the same split as Booking,
+     so the list lines up under the booking sheet. */
+  .faq__in {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--s8);
+    align-items: start;
+  }
+  .faq__in .section__head { margin-bottom: 0; }
+  .faq__in .faq__list { max-width: none; }
 }
 
-/* The note that says a section's photos are samples. */
-.sample-note { margin-top: var(--s5); color: var(--ash); }
+/* ---------- The presentation view ---------- */
+/* <html class="is-clean"> while settings.workingView is false in data/site.js: the page as the salon
+   is shown it. Unconfirmed things keep their data-todo mark in the markup but are not outlined, and an
+   empty photo frame shows the stone surface without the words "Photo needed". */
+html.is-clean [data-todo] { outline: 0; }
+/* The rule above must not take the keyboard focus ring off a marked link. */
+html.is-clean [data-todo]:focus-visible { outline: 2px solid var(--slate); outline-offset: 3px; }
+html.is-clean .actionbar__item[data-todo]:focus-visible { outline-offset: -4px; }
+html.is-clean .photo.is-missing::after { content: none; }
