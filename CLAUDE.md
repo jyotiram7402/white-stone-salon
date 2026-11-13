@@ -90,10 +90,20 @@ One page, `app/page.jsx`, in this order:
 1. **Header.** Wordmark, links to Services, Styles, Offers, Artists, Gallery and Visit, and a "Book" button. On phones: wordmark and a menu button that opens a full-screen menu with large links, the phone number and the address. The links come from `navLinks` in `data/site.js`, which drops the link to a section that is left out.
 2. **Hero.** One tall photo (slot `hero`). An h1 that says what and where in plain words: "Hair, beard and skin care on Fountain Road, Kharadi". Keep "Fountain Road," on one line with the `nowrap` span, never with a non-breaking space: the library that splits the headline into lines ignores that space, and the headline would jump when the opening sequence ends. One line with the landmark ("Opposite Cheryl Society") and the closing time. Two actions: "Book an appointment" (goes to the booking form) and "Call". From 768 to 1023px the text and the photo share the row equally.
 3. **Service band.** Two lines of the fifteen service names that slide in opposite directions as the page scrolls, with a thin bar between names. It repeats the menu, so hide it from screen readers.
-4. **Services menu.** The five groups. Each row: service name, price slot, and an "Add" toggle that adds the service to the booking, with a hairline between rows and no leader line. Groups collapse on phones; two columns on desktop. Under the menu, the line about single-service prices, with a link to call and a link to the offers. When one or more services are selected, a slim bar shows "2 services selected" and "Book these". A package counts as a package: "1 service and 1 package selected".
+4. **Services menu.** The five groups. Each row: service name, price slot, and an "Add" toggle that adds the service to the booking, with a hairline between rows and no leader line. Groups collapse on phones; two columns on desktop. The packages are the only prices on the site, so the menu points to them twice:
+   - **The intro line** ends "Men's packages start at Rs 399."
+   - **Under the menu,** the line about single-service prices has a link to call, then "Men's packages from Rs 399".
+   - **The figure** is `offersFrom` in `data/site.js`, worked out from the offers, never typed in.
+
+   When one or more services are selected:
+   - **From 1024px,** a slim bar shows "2 services selected" and "Book these". A package counts as a package: "1 service and 1 package selected".
+   - **Below 1024px** there is no such bar. The action bar's Book reads "Book these" instead, so two marigold Book buttons never stack.
 5. **Styles.** Example cuts in three groups, Women, Men and Children: four tall photos each, with a short caption that describes the cut. The captions describe photos; they are not a price list and add no service. It follows Services so that photographs come early.
+   - **On phones** each group is one sideways row that snaps to each photo, with the next photo showing at the edge. That keeps the section short. A row that scrolls takes keyboard focus.
+   - **From 768px** each group is a four-column grid.
 6. **Combos.** The five groupings, each listing its services, with "Add combo to booking".
-   - **Intro line:** "Shortcuts for services that go together. One tap adds them all to your booking." Claim no price and no saving: the combos are unconfirmed.
+   - **Intro line:** "Shortcuts for services that go together: one tap adds each of them to your booking. For set prices, see the men's packages below." The last sentence links to Offers. Claim no price and no saving for a combo: the combos are unconfirmed. Keep the heading "Combos"; do not call them "often booked together", which the salon has not said.
+   - **On phones** the combo button sits on the right, like every other Add.
    - **Turning a combo off** removes only the services that combo added itself. A service chosen on its own stays, and so does one that another chosen combo still needs. If the combo added nothing, all its services go.
    - **Build your own:** the last cell of the list invites people to build their own from the menu.
    - **From 1024px** the list is two columns, each cell with the name and services on the left and the button on the right, so that no row has a hole in its middle.
@@ -107,7 +117,7 @@ One page, `app/page.jsx`, in this order:
 
 There is no Reviews section until the salon supplies real quotes and a confirmed rating. When it does, the section goes between Gallery and Booking.
 
-On phones, a **bottom action bar** stays fixed: Book, Call, WhatsApp, Directions. Four equal targets at least 44px tall, clear of the phone's safe area. The page reserves space for it. It hides while the booking form is on screen or a field has focus.
+On phones, a **bottom action bar** stays fixed: Book, Call, WhatsApp, Directions. Four equal targets at least 44px tall, clear of the phone's safe area. The page reserves space for it. It hides while the booking form is on screen or a field has focus. While anything is selected, its Book reads "Book these".
 
 ## 6. Motion
 
@@ -141,7 +151,7 @@ Rules for the fifth kind:
 The form sends a request through WhatsApp. There is no server-side code for it. Use the tested helpers on `window.WS`.
 
 Fields, in this order:
-1. **Services:** chips for what was selected on the page, removable, plus "Add a service or package". That list holds the menu's services in their groups and, while Offers is on the page, a group "Men's packages" labelled as the package headings read ("Package 7 (Rs 1,149)"). Choosing a package adds it exactly as its Add button does. At least one service or package is required.
+1. **Services:** chips for what was selected on the page, removable, plus "Add a service or package". That list holds the menu's services in their groups and, while Offers is on the page, a group "Men's packages". Each package option says what it includes: "Package 2 (Rs 399): Haircut, Hair wash, Shaving, Head and shoulder massage". Choosing a package adds it exactly as its Add button does, so the chip and the request keep the short "Offer: Package 2 (Rs 399)". The hint above the list reads "Nothing added yet. Choose from the list below." At least one service or package is required.
 2. **Preferred artist:** optional, default "No preference".
 3. **Date:** native date input, from `WS.isoDate(0)` to `WS.isoDate(60)`.
 4. **Time:** a select built with `WS.timeSlots(open, close, 30, 30, notBefore)`, reading `data-open` and `data-close` from the form. For today, pass the time 30 minutes from now as `notBefore`. If no times are left today, say so and suggest tomorrow.

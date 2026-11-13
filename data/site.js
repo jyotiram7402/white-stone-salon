@@ -129,6 +129,16 @@ export const has = {
   questions: shown(questions).length > 0
 };
 
+// The cheapest package's offer price, as the poster writes it ("Rs 399"), for the two links to Offers in
+// the services menu. Worked out from the list, so it stays true when a price changes. Null with no offers.
+function priceValue(text) {
+  return Number(String(text).replace(/[^\d]/g, '')) || Infinity;
+}
+export const offersFrom = shown(offers).reduce(
+  (low, offer) => (low === null || priceValue(offer.now) < priceValue(low) ? offer.now : low),
+  null
+);
+
 // Header, phone menu and footer, in the order of the page. A link to a section that is left out is left out too.
 export const navLinks = [
   { href: '#services', label: 'Services' },

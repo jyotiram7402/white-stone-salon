@@ -288,6 +288,22 @@
     sync();
   });
 
+  /* 3.3 b Styles rows: on phones each group of photos is a sideways row (app/next.css). A row that scrolls
+     must be reachable by keyboard, so it takes focus, named by its heading; a row that fits does not. */
+  safely(function () {
+    var rows = $all('.styles__grid');
+    if (!rows.length) return;
+    function sync() {
+      rows.forEach(function (row) {
+        if (row.scrollWidth > row.clientWidth + 1) row.setAttribute('tabindex', '0');
+        else row.removeAttribute('tabindex');
+      });
+    }
+    on(window, 'resize', sync);
+    on(window, 'load', sync);
+    sync();
+  });
+
   /* 3.4 Gallery lightbox: a <dialog>, so the browser traps focus and handles Escape */
   safely(function () {
     var box = $('#lightbox');
@@ -502,6 +518,7 @@
     var waAgain = $('#wa-again');
     var copyStatus = $('#copy-status');
     var pickedCount = $('#picked-count');
+    var barBookLabel = $('#actionbar-book-label');   // phones: "Book", or "Book these" once anything is chosen
 
     var WS = window.WS;   // the tested helpers from part 1
     var DRAFT_KEY = 'ws-booking';
@@ -655,6 +672,7 @@
       var text = summary();
       chipsEmpty.hidden = picked.length > 0;
       pickedCount.textContent = text;
+      if (barBookLabel) barBookLabel.textContent = picked.length ? 'Book these' : 'Book';
       root.classList.toggle('has-picked', picked.length > 0);
       if (picked.length) setError('services', '');
       if (opts.announce) say(text);
@@ -699,7 +717,8 @@
     }
 
     // "Add a service or package": the same names as the menu, in the same groups,
-    // then the men's packages from Offers, labelled as their headings read ("Package 7 (Rs 1,149)").
+    // then the men's packages from Offers, each with what it includes, so nobody has to remember it:
+    // "Package 2 (Rs 399): Haircut, Hair wash, Shaving, Head and shoulder massage".
     $all('.group').forEach(function (g) {
       var title = $('.group__name', g);
       var og = document.createElement('optgroup');
@@ -721,9 +740,11 @@
         var id = b.getAttribute('data-offer');
         var slip = b.closest('.offer');
         var heading = slip ? $('.offer__title', slip) : null;
+        var what = slip ? $('.offer__what', slip) : null;
         var o = document.createElement('option');
         o.value = 'offer:' + id;
-        o.textContent = heading ? heading.textContent.trim() : 'Package ' + id;
+        o.textContent = (heading ? heading.textContent.trim() : 'Package ' + id) +
+          (what ? ': ' + what.textContent.trim() : '');
         pg.appendChild(o);
       });
       serviceAdd.appendChild(pg);

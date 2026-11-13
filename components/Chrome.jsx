@@ -109,7 +109,8 @@ export function Footer({ year }) {
   );
 }
 
-// Selected-services bar. Shown by site.js while one or more services are selected.
+// Selected-services bar, from 1024px only (site.css). Shown by site.js while one or more services are
+// selected. Below 1024px the action bar's Book says "Book these" instead, so only one marigold Book shows.
 export function PickedBar() {
   return (
     <aside className="picked on-slate" id="picked" aria-label="Selected services">
@@ -121,12 +122,13 @@ export function PickedBar() {
 
 // Bottom action bar (phones and tablets). Hidden by site.js while the booking form is on screen
 // or a field has focus. WhatsApp and Directions are unconfirmed until the owner checks them.
+// While anything is selected, site.js changes the Book label to "Book these" (#actionbar-book-label).
 export function ActionBar() {
   return (
     <nav className="actionbar" id="actionbar" aria-label="Quick actions">
       <a className="actionbar__item actionbar__item--book" href="#book">
         <Icon name="calendar" />
-        Book
+        <span id="actionbar-book-label">Book</span>
       </a>
       <a className="actionbar__item" href={business.phoneHref}>
         <Icon name="phone" />

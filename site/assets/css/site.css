@@ -163,7 +163,6 @@ html { accent-color: var(--slate); caret-color: var(--slate); }
 
 /* Anchors and keyboard focus stop clear of the fixed bars at the bottom. */
 html { scroll-padding-top: 1rem; scroll-padding-bottom: calc(var(--bar-h) + 1rem); }
-html.has-picked { scroll-padding-bottom: calc(var(--bar-h) + var(--picked-h) + 1rem); }
 html.is-locked { overflow: hidden; }   /* while the phone menu or the lightbox is open */
 
 /* Without JavaScript the page is still a complete brochure. Controls that would do nothing are left out. */
@@ -547,14 +546,16 @@ summary::-webkit-details-marker { display: none; }
   .add[aria-pressed="false"]:hover { background: var(--pebble); }
 }
 
-/* Selected-services bar. Visibility flips after the slide so hidden links cannot take focus. */
+/* Selected-services bar, from 1024px only (2.21). Below that, the action bar's Book says "Book these"
+   instead, so two marigold Book buttons never stack at the bottom of a phone.
+   Visibility flips after the slide so hidden links cannot take focus. */
 .picked {
   position: fixed;
   z-index: 30;
   left: 0;
   right: 0;
   bottom: calc(var(--bar-h) + env(safe-area-inset-bottom));
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   gap: var(--s4);
@@ -628,6 +629,7 @@ summary::-webkit-details-marker { display: none; }
   border-bottom: 1px solid var(--pebble);
 }
 .combo__items { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.combo .add { justify-self: end; }   /* on the right, like every other Add on the page */
 /* The last cell of the list: "Or build your own". */
 .combo--own { color: var(--ash); }
 .combo--own a { color: var(--slate); }
@@ -922,7 +924,6 @@ summary::-webkit-details-marker { display: none; }
   background: var(--slate);
   color: var(--stone);
 }
-.has-picked .site-footer { padding-bottom: calc(var(--s7) + var(--bar-h) + var(--picked-h) + env(safe-area-inset-bottom)); }
 .site-footer--plain { padding-bottom: var(--s7); }   /* privacy and not-found pages have no action bar */
 .site-footer__in { display: grid; gap: var(--s5); }
 .site-footer__nav ul { display: flex; flex-wrap: wrap; column-gap: var(--s5); }
@@ -1087,6 +1088,7 @@ summary::-webkit-details-marker { display: none; }
   .combo--own:nth-child(odd) { grid-column: 1 / -1; }
 
   .picked {
+    display: flex;
     left: max(var(--page-pad), calc((100vw - var(--wrap)) / 2));
     right: auto;
     bottom: var(--s5);

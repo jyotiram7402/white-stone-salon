@@ -567,3 +567,36 @@ Impeccable's `polish`: refinement only, in its order: broken or misleading paths
 - The outlined second line of the sliding band.
 - The "Artist: No preference" line in every request, which the brief's message format includes.
 - Points B1 to B6 of section 13.
+
+## 16. Second critique and its four fixes, 13 November 2026
+
+After the P2 fixes and the polish went live, Impeccable's `critique` ran again, with a reviewer who had not seen the first one. Score: 28 out of 36 again. The first round's issues were gone; the reviewer found four new ones, and the owner asked for all four.
+
+1. **Prices are signposted from the top of the menu (P1).** On a phone the twelve packages, the only prices on the site, start about seven screens down, and the menu pointed to them only in its last grey line.
+   - **The Services intro** now ends "Men's packages start at Rs 399." The cheapest package's price is a link to Offers.
+   - **The line under the menu** links "Men's packages from Rs 399".
+   - **Both figures** are worked out from `offers` in `data/site.js` (the lowest offer price), so they stay true when prices change.
+   - **On phones each Styles group is one sideways row** instead of a 2 by 2 grid: about 58% of the screen per photo, with the next one showing at the edge. It snaps to each photo, like the Artists scroller. Styles gets about a third shorter, and Offers comes that much sooner. A row that scrolls can take keyboard focus, so it can be scrolled without a mouse (`site.js`, 3.3). From 768px it is the four-column grid again.
+
+2. **Combos read as shortcuts, not deals (P2).**
+   - **The intro line:** "Shortcuts for services that go together: one tap adds each of them to your booking. For set prices, see the men's packages below." It claims nothing about combo prices, which are unconfirmed, and points anyone looking for a price to the packages, which have real ones.
+   - **On phones the combo button sits on the right,** like every other Add on the page.
+   - **The heading stays "Combos",** as the brief names it. The reviewer's "Often booked together" would be a claim the salon has not made.
+
+3. **The booking list describes each package (P2).** Each package option now reads "Package 2 (Rs 399): Haircut, Hair wash, Shaving, Head and shoulder massage", built from its row in Offers, so choosing one is no longer a memory test. The chip and the request keep the short "Offer: Package 2 (Rs 399)". The hint above the list is now just "Nothing added yet. Choose from the list below."
+
+4. **One Book button on phones (P2).** Choosing something stacked the selected-services bar, with its own marigold "Book these", on top of the action bar's marigold "Book": two buttons doing one thing, and about 116px of fixed bars.
+   - **Below 1024px** the selected-services bar is gone. Instead the action bar's Book reads "Book these" while anything is chosen.
+   - **From 1024px,** where there is no action bar, the selected-services bar works as before.
+   - **The count** is still announced to screen readers as it changes.
+
+Still waiting for the owner, from both critiques:
+- the order of sections (Offers straight after Services);
+- whether the mobile number is required, when WhatsApp already carries it;
+- "Open till 10:30 pm" against "Closes at 10:30 pm";
+- fewer reveals;
+- unconfirmed combos and children's styles in the presentation view;
+- how often the curtain plays;
+- empty photo frames in the presentation view;
+- the motion as a whole;
+- a "Something else" choice in the booking list.

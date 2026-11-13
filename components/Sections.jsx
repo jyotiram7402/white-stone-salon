@@ -1,6 +1,6 @@
 import { Icon } from './Icons';
 import Photo from './Photo';
-import { business, serviceColumns, prices, bandLines, offers, combos, artists, shown, has } from '../data/site';
+import { business, serviceColumns, prices, bandLines, offers, combos, artists, shown, has, offersFrom } from '../data/site';
 import { hero, gallery, styles, artistPhotos } from '../data/photos';
 
 // The sections from the hero down to the gallery, in the order of the page.
@@ -87,7 +87,11 @@ export function Services() {
       <div className="wrap">
         <div className="section__head">
           <h2 data-rv="lines" id="services-title">Services</h2>
-          <p className="lead" data-rv="up">Add what you want, then book them together.</p>
+          {/* The only prices on the site are the packages, far down the page on a phone: point to them here. */}
+          <p className="lead" data-rv="up">
+            Add what you want, then book them together.
+            {offersFrom && <>{' '}<a href="#offers">{'Men’s packages start at ' + offersFrom}</a>.</>}
+          </p>
         </div>
 
         <div className="menu-cols">
@@ -122,7 +126,7 @@ export function Services() {
         <p className="services__note" data-rv="up">
           <span data-todo="">Prices for single services are on request:</span>{' '}
           <a href={business.phoneHref}>{'call ' + business.phoneDisplay}</a>.
-          {has.offers && <>{' '}<a href="#offers">See the offers on men&rsquo;s packages</a>.</>}
+          {offersFrom && <>{' '}<a href="#offers">{'Men’s packages from ' + offersFrom}</a>.</>}
         </p>
       </div>
     </section>
@@ -143,8 +147,9 @@ export function Styles() {
         {styles.map((group) => {
           return (
             <div className="styles__group" key={group.key} {...todoFlag(group.todo)}>
-              <h3 className="styles__name">{group.title}</h3>
-              <ul className="styles__grid" data-rv="kids">
+              <h3 className="styles__name" id={'styles-' + group.key + '-title'}>{group.title}</h3>
+              {/* On phones a sideways row; site.js lets a row that scrolls take keyboard focus. */}
+              <ul className="styles__grid" data-rv="kids" aria-labelledby={'styles-' + group.key + '-title'}>
                 {group.looks.map((item) => (
                   <li className="look" key={item.slot}>
                     <Photo photo={item} sizes="(min-width: 48em) 20vw, 46vw" reveal />
@@ -172,7 +177,11 @@ export function Combos() {
       <div className="wrap">
         <div className="section__head">
           <h2 data-rv="lines" id="combos-title">Combos</h2>
-          <p className="lead" data-rv="up">Shortcuts for services that go together. One tap adds them all to your booking.</p>
+          {/* Claim nothing about combo prices: the combos are unconfirmed. Anyone after a price is sent to the packages. */}
+          <p className="lead" data-rv="up">
+            Shortcuts for services that go together: one tap adds each of them to your booking.
+            {offersFrom && <>{' '}For set prices, see the <a href="#offers">men&rsquo;s packages below</a>.</>}
+          </p>
         </div>
         <ul className="combos__list" data-rv="kids">
           {combos.map((combo) => (

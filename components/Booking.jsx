@@ -44,12 +44,8 @@ export function Booking() {
             <div className="field">
               <p className="field__label" id="chips-label">Services</p>
               <ul className="chips" id="chips" aria-labelledby="chips-label" />
-              {/* While Offers is on the page, site.js also lists the men's packages in this select. */}
-              <p className="field__hint" id="chips-empty">
-                {has.offers
-                  ? 'Nothing added yet. Choose from the list below, or tap Add next to any service or package on this page.'
-                  : 'Nothing added yet. Choose from the list below, or tap Add next to any service on this page.'}
-              </p>
+              {/* While Offers is on the page, site.js also lists the men's packages in this select, with their contents. */}
+              <p className="field__hint" id="chips-empty">Nothing added yet. Choose from the list below.</p>
               <label className="visually-hidden" htmlFor="service-add">{addLabel}</label>
               <div className="control control--select">
                 <select id="service-add" aria-describedby="services-error">
