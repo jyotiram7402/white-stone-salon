@@ -575,8 +575,8 @@
         var all = b.getAttribute('data-combo').split('|').every(function (n) { return has('svc:' + n); });
         b.setAttribute('aria-pressed', String(all));
       });
-      $all('option', serviceAdd).forEach(function (o) {
-        if (o.value) o.disabled = has('svc:' + o.value);
+      $all('option', serviceAdd).forEach(function (o) {   // a package's value is already its key ("offer:7")
+        if (o.value) o.disabled = has(o.value.indexOf('offer:') === 0 ? o.value : 'svc:' + o.value);
       });
 
       var fresh = [];
@@ -655,7 +655,8 @@
       return o;
     }
 
-    // "Add a service": the same names as the menu, in the same groups.
+    // "Add a service or package": the same names as the menu, in the same groups,
+    // then the men's packages from Offers, labelled as their headings read ("Package 7 (Rs 1,149)").
     $all('.group').forEach(function (g) {
       var title = $('.group__name', g);
       var og = document.createElement('optgroup');
@@ -669,10 +670,31 @@
       });
       serviceAdd.appendChild(og);
     });
+    var offerButtons = $all('[data-offer]');
+    if (offerButtons.length) {
+      var pg = document.createElement('optgroup');
+      pg.label = 'Men’s packages';
+      offerButtons.forEach(function (b) {
+        var id = b.getAttribute('data-offer');
+        var slip = b.closest('.offer');
+        var heading = slip ? $('.offer__title', slip) : null;
+        var o = document.createElement('option');
+        o.value = 'offer:' + id;
+        o.textContent = heading ? heading.textContent.trim() : 'Package ' + id;
+        pg.appendChild(o);
+      });
+      serviceAdd.appendChild(pg);
+    }
     on(serviceAdd, 'change', function () {
-      var n = serviceAdd.value;
-      if (!n) return;
-      add('svc:' + n, n);
+      var v = serviceAdd.value;
+      if (!v) return;
+      if (v.indexOf('offer:') === 0) {
+        // Exactly what the package's own Add button does, so the request reads the same.
+        var btn = $('[data-offer="' + v.slice(6).replace(/[^\w-]/g, '') + '"]');
+        if (btn) add('offer:' + btn.getAttribute('data-offer'), offerLabel(btn));
+      } else {
+        add('svc:' + v, v);
+      }
       serviceAdd.value = '';
       render({ announce: true });
     });
@@ -733,7 +755,10 @@
     /* --- checking --- */
 
     var checks = {
-      services: function () { return picked.length ? '' : 'Add at least one service.'; },
+      services: function () {
+        if (picked.length) return '';
+        return offerButtons.length ? 'Add at least one service or package.' : 'Add at least one service.';
+      },
       date: function () {
         var v = date.value;
         if (!v) return 'Choose a date.';
@@ -953,8 +978,10 @@
     // and they use fromTo with explicit end values so nothing can end up stuck hidden.
     showEverything();
 
+    // The curtain is gone 0.9 seconds after the script starts, and the start-up guard skips it entirely
+    // if the script starts later than 0.8 seconds after the first paint. (Until 12 November 2026 it took 1.7.)
     if (playIntro && curtain) {
-      lead = 0.95;
+      lead = 0.45;
       var mark = SplitText.create('.curtain__mark', { type: 'chars', mask: 'chars' });
       gsap.timeline({
         onComplete: function () {
@@ -963,11 +990,11 @@
           mark.revert();
         }
       })
-        .fromTo('.curtain__comb', { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power3.out' })
-        .to(mark.chars, { yPercent: -110, duration: 0.5, stagger: 0.02, ease: 'power3.in' }, 0.5)
-        .to(curtain, { yPercent: -100, duration: 0.85, ease: 'power3.inOut' }, 0.85);
+        .fromTo('.curtain__comb', { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'power3.out' })
+        .to(mark.chars, { yPercent: -110, duration: 0.35, stagger: 0.012, ease: 'power3.in' }, 0.2)
+        .to(curtain, { yPercent: -100, duration: 0.6, ease: 'power3.inOut' }, 0.3);
       // Whatever happens to the timeline, the page is never left covered.
-      setTimeout(function () { root.classList.remove('curtain-on'); }, 4000);
+      setTimeout(function () { root.classList.remove('curtain-on'); }, 2000);
     }
 
     // The hero sequence (tested). With a curtain it starts as the curtain begins to lift.

@@ -12,6 +12,7 @@ import { visit } from '../data/photos';
 /* ---------- 10. Booking ---------- */
 // data-open and data-close set the first and last hour offered. data-whatsapp is the number the request goes to.
 export function Booking() {
+  const addLabel = has.offers ? 'Add a service or package' : 'Add a service';
   return (
     <section className="book on-slate" id="book" aria-labelledby="book-title">
       <div className="wrap book__in">
@@ -43,11 +44,16 @@ export function Booking() {
             <div className="field">
               <p className="field__label" id="chips-label">Services</p>
               <ul className="chips" id="chips" aria-labelledby="chips-label" />
-              <p className="field__hint" id="chips-empty">Nothing added yet. Choose from the list below, or tap Add in the services menu.</p>
-              <label className="visually-hidden" htmlFor="service-add">Add a service</label>
+              {/* While Offers is on the page, site.js also lists the men's packages in this select. */}
+              <p className="field__hint" id="chips-empty">
+                {has.offers
+                  ? 'Nothing added yet. Choose from the list below, or tap Add next to any service or package on this page.'
+                  : 'Nothing added yet. Choose from the list below, or tap Add next to any service on this page.'}
+              </p>
+              <label className="visually-hidden" htmlFor="service-add">{addLabel}</label>
               <div className="control control--select">
                 <select id="service-add" aria-describedby="services-error">
-                  <option value="">Add a service</option>
+                  <option value="">{addLabel}</option>
                 </select>
               </div>
               <p className="field__error" id="services-error" aria-live="polite" />

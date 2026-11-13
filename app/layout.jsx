@@ -25,15 +25,16 @@ export const viewport = {
 };
 
 // Start-up guard (tested in the plain-HTML version; keep its logic exactly).
-// It runs before the page is painted. It hides the hero text for the opening sequence only when motion is
-// allowed and the sequence has not played in this browser session, and it always un-hides the text after
-// 2.5 seconds if the script or the animation library is slow.
+// It runs before the page is painted. It hides the hero text and shows the curtain for the opening sequence
+// only when motion is allowed and the sequence has not played in this browser session. If the script has not
+// started within 0.8 seconds, it uncovers the page and the sequence is skipped: the curtain must lift within
+// about a second of the first paint (CLAUDE.md section 6). It was 2.5 seconds until 12 November 2026.
 const guard =
   "(function(){var d=document.documentElement;d.classList.add('js');" +
   "var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=false;" +
   "try{seen=sessionStorage.getItem('ws-intro')==='1';}catch(e){}" +
   "if(!reduce&&!seen){d.classList.add('intro-pending');" +
-  "window.__introTimer=setTimeout(function(){d.classList.remove('intro-pending');window.__introSkipped=true;},2500);}})();";
+  "window.__introTimer=setTimeout(function(){d.classList.remove('intro-pending');window.__introSkipped=true;},800);}})();";
 
 // "is-clean" is the presentation view (settings.workingView is false): app/next.css then draws no red
 // outlines and no "Photo needed" words.

@@ -476,6 +476,35 @@ The owner did not want the rows of small ticks. All of them are gone, and nothin
 - **Service band:** one thin bar between names in place of three teeth.
 - **Opening curtain:** a plain line above the name.
 
-What still identifies the page: the stone and slate with one marigold, Marcellus cut large (the band, the footer name), and the stone surface in an empty frame.
+What still identifies the page: the stone and slate with one marigold, large type (the sliding band in Hanken Grotesk, the footer name in Marcellus), and the stone surface in an empty frame.
 
 Checked against section 4 of `CLAUDE.md` and its list of signs of a generated page: the offers are a typeset list, not cards; the numbers are the salon's own package numbers, written as names, not markers on things that are not steps; the flags carry the salon's printed prices, not made-up figures; marigold stays on the booking action and the offer flags only.
+
+## 13. After the Impeccable critique of 12 November 2026
+
+The live site (white-stone-salon.vercel.app) was critiqued with Impeccable's `critique`: 28 out of 36, "Good", with two P1 issues, three P2 issues, and six points where the brief itself costs visitors. Impeccable's detector could not run here (rule 1.1), so browser measurements stood in for it: no contrast failures, no sideways scrolling, headings in order, every image with alt text. The owner asked for the two P1 fixes.
+
+1. **The booking form takes packages.**
+   - **The problem.** The twelve men's packages are the only priced things on the site, but the form's "Add a service" list held only the menu's fifteen services. The Book button in the phone bar lands on that form, so someone who came for a package had to pick the wrong thing or scroll back up.
+   - **The list.** It is now "Add a service or package": the menu's services in their five groups, then a group "Men's packages" built from the Offers rows. Each package is labelled as its heading reads, for example "Package 7 (Rs 1,149)".
+   - **Choosing a package** adds it exactly as its Add button does, so the request still reads "Offer: Package 7 (Rs 1,149)".
+   - **The hint and the error** under the field name packages too, but only while Offers is on the page.
+
+2. **The curtain lifts within about a second, as section 6 of `CLAUDE.md` always said.**
+   - **The problem.** The curtain covered the page until the scripts started, then took 1.7 seconds more to lift. "Once per browser session" is remembered per tab, and a link from Google Maps opens a new tab, so most visitors from Maps saw all of it.
+   - **The sequence** now takes 0.9 seconds once the script starts. The line draws in 0.4 seconds, the name leaves from 0.2, the curtain lifts from 0.3 to 0.9, and the headline starts rising at 0.45.
+   - **The start-up guard** now gives up after 0.8 seconds instead of 2.5. On a slow phone the visitor sees at most 0.8 seconds of slate, then the page, still, without the sequence.
+   - **How often it plays** is unchanged; that is point B1 below, for the owner.
+
+Still open from the critique, for later:
+
+- **P2, the packages on phones.** Each package's contents wrap in a column about 210px wide, at 15px, which is below section 4's 16px. Give them the full width and set them at 16px.
+- **P2, Visit on phones.** The section opens with a blank stone frame, and the address and "Get directions" come after it. Put the facts and buttons first and the photo last, the order section 5 of `CLAUDE.md` lists.
+- **P2, Combos before Offers.** Unpriced combos come before the priced packages and give no reason to choose them. Turning a combo off also removes services the visitor added on their own.
+- **For the owner, B1 to B6:**
+  - B1: how often the curtain plays.
+  - B2: Combos before Offers.
+  - B3: the Children group, shown in the presentation view, implies a service that is not confirmed.
+  - B4: empty photo frames in the presentation view look like failed images.
+  - B5: the motion as a whole reads as a stock kit; keep one moment that is the salon's own.
+  - B6: there is no choice for a service that appears only inside packages, such as hair colour; add "Something else (say what in the note)".

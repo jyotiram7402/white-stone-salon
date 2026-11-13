@@ -109,7 +109,10 @@ On phones, a **bottom action bar** stays fixed: Book, Call, WhatsApp, Directions
 
 The site is animated throughout. It moves in five ways.
 
-1. **One opening sequence**, once per browser session: a slate curtain carrying the wordmark lifts, the hero headline rises line by line, the supporting line and the actions fade up, and the hero photo settles. In the markup: `data-intro="lines"` on the h1, `data-intro="fade"` on the supporting line and the actions, `data-intro="settle"` on the hero photo, and the `.curtain` element at the top of the body.
+1. **One opening sequence**, once per browser session: a slate curtain carrying the wordmark lifts, the hero headline rises line by line, the supporting line and the actions fade up, and the hero photo settles. In the markup: `data-intro="lines"` on the h1, `data-intro="fade"` on the supporting line and the actions, `data-intro="settle"` on the hero photo, and the `.curtain` element at the top of the body. A visitor never waits more than about a second:
+   - The curtain is gone 0.9 seconds after the script starts.
+   - The start-up guard in `app/layout.jsx` uncovers the page, and skips the sequence, if the script has not started within 0.8 seconds of the first paint.
+   - Do not lengthen either time.
 2. **Motion tied directly to scrolling.** The service band (`data-slide` on each line, inside a band that hides overflow; a negative number slides the other way). Photo drift (`data-drift="6"` on an `<img>`, inside its `.photo` frame). The hero photo and the gallery columns moving at different speeds. The large wordmark rising in the footer. The progress line under the header.
 3. **Reveals, once, as content scrolls into view.** `data-rv="lines"`: a heading rises line by line. `data-rv="up"`: a block fades up. `data-rv="kids"`: the children of a list or grid follow one another. `data-rv="photo"`: a photo frame wipes open. The rule at the top of a section draws from the left.
 4. **Smooth wheel scrolling on desktop** (Lenis). Phones and tablets keep their own scrolling.
@@ -134,7 +137,7 @@ Rules for the fifth kind:
 The form sends a request through WhatsApp. There is no server-side code for it. Use the tested helpers on `window.WS`.
 
 Fields, in this order:
-1. **Services:** chips for what was selected on the page, removable, plus "Add a service". At least one is required.
+1. **Services:** chips for what was selected on the page, removable, plus "Add a service or package". That list holds the menu's services in their groups and, while Offers is on the page, a group "Men's packages" labelled as the package headings read ("Package 7 (Rs 1,149)"). Choosing a package adds it exactly as its Add button does. At least one service or package is required.
 2. **Preferred artist:** optional, default "No preference".
 3. **Date:** native date input, from `WS.isoDate(0)` to `WS.isoDate(60)`.
 4. **Time:** a select built with `WS.timeSlots(open, close, 30, 30, notBefore)`, reading `data-open` and `data-close` from the form. For today, pass the time 30 minutes from now as `notBefore`. If no times are left today, say so and suggest tomorrow.
@@ -240,3 +243,10 @@ When I send screenshots or a Vercel build log later, describe what you see befor
 ## 11. Skills
 
 If these skills are installed, use them: `frontend-design` at step 2. `emil-design-engineering`, `make-interfaces-feel-better` and `web-animation-design` while writing the CSS and motion. `ux-copy` for every label, error and empty state. `accessibility-review` and `ui-review` at step 5, saying plainly that the review was of code and not of a rendered page. Where a skill disagrees with this file, this file wins.
+
+**Impeccable** (`impeccable`, by Paul Bakaus, copied by hand from github.com/pbakaus/impeccable into the user folder `~/.claude/skills/impeccable`) is for reviews and refinements: `critique`, `audit`, `polish`, `clarify`, `layout`, `typeset`, `adapt`, `harden`, `optimize`, `animate`, `quieter`, `distill`. In this project:
+
+- Its setup runs a launcher script (`scripts/impeccable context`). Rule 1.1 forbids that, so always take the skill's own fallback: say that its context did not load, then read this file, `data/` and `docs/DESIGN.md` instead.
+- Never use anything that runs its scripts, a server or a browser: `detect`, `hooks`, `pin`, `doctor`, `live`, `generate`. Never turn on its design hook: it runs a downloaded program, unsandboxed, after every edit.
+- Do not run `init` or `document`. The product context is sections 2 and 3 of this file, and the design is `docs/DESIGN.md`. A `PRODUCT.md` or a second `DESIGN.md` would repeat them and drift apart.
+- `bolder`, `colorize`, `delight` and `overdrive` change the look that section 4 fixes: use them only when I ask.
