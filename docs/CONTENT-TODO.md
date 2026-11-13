@@ -14,7 +14,7 @@ To find them all, search the project for `data-todo` (in `components/`) and for 
 |---|---|---|---|---|
 | 1 | Opening time and weekly hours | Hero line; Visit, "Hours" | "Open till 10:30 pm" (closing time is from the Google listing, November 2026) | Opening and closing time for each day of the week, and any weekly day off |
 | 2 | Hours used for booking times | Booking form, "Time" field | Times every 30 minutes from 10:00 to 10:00 pm, from `bookingOpen` and `bookingClose` in `data/site.js`. 10:00 is a guess. | The earliest and latest time an appointment can start. If hours differ by day, say so: the form uses one set of hours for every day |
-| 3 | Prices of single services | Services, the line under the menu | "Prices for single services are on request", then a link to the offers. Each service row has an empty price slot. The poster prices packages only | A price, or a "from" price, for each of the 15 services |
+| 3 | Prices of single services | Services, the line under the menu | "Prices for single services are on request: call +91 90271 56238", then a link to the offers. Each service row has an empty price slot. The poster prices packages only | A price, or a "from" price, for each of the 15 services |
 | 4 | (Offers: supplied, see above) | | | |
 | 5 | Combos | Combos, five lines | Five suggested groupings without prices | Whether the salon sells each of these as a combo, the name it wants, the services in it, and the price |
 | 6 | Hair artists | Artists, three slots | "Artist name", "Speciality", an empty portrait frame | For each artist: name as it should appear, what they are best at in a few words, a portrait, and their agreement to be shown. Two to six artists |

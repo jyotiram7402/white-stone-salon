@@ -923,6 +923,10 @@
       settle(confirmEl);
       confirmEl.classList.add('is-shown');
       confirmEl.focus();
+
+      // The request is made, so it is no longer a draft: a reload starts with an empty form,
+      // instead of offering the same request again. The request itself stays on screen above.
+      try { sessionStorage.removeItem(DRAFT_KEY); } catch (err) {}
     });
 
     on($('#copy-request'), 'click', function () {
@@ -1134,22 +1138,17 @@
       });
     }
 
-    // data-rv="kids": the children of a list follow one another, and comb leaders draw from the left.
+    // data-rv="kids": the children of a list follow one another.
     gsap.utils.toArray('[data-rv="kids"]').forEach(function (box) {
       var kids = gsap.utils.toArray(box.children);
-      var combs = gsap.utils.toArray(box.querySelectorAll('.comb'));
       if (!kids.length) return;
       gsap.set(kids, { opacity: 0, y: 24 });
-      if (combs.length) gsap.set(combs, { scaleX: 0, transformOrigin: 'left center' });
       ScrollTrigger.create({
         trigger: box,
         start: 'top 88%',
         once: true,
         onEnter: function () {
           gsap.to(kids, { opacity: 1, y: 0, duration: 0.7, stagger: 0.06, ease: 'power3.out', clearProps: 'opacity,transform' });
-          if (combs.length) {
-            gsap.to(combs, { scaleX: 1, duration: 0.9, stagger: 0.06, delay: 0.15, ease: 'power3.out', clearProps: 'transform' });
-          }
         }
       });
     });

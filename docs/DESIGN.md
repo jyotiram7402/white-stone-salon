@@ -538,3 +538,32 @@ Head and shoulder massage, D-tan face clean-up (Ozone)
    - **When a combo added nothing,** because all its services had already been chosen one by one, turning it off removes them all. The visitor is removing the combo as a whole.
    - **Saved with the draft.** Which combo added what is kept with the rest of the draft, so it survives a reload.
    - **The selected-services bar** now counts packages as packages ("1 service and 1 package selected"), the word the Offers section and the booking list use. The booking request keeps its "Offer: Package 7 (Rs 1,149)" line, as section 5 of `CLAUDE.md` specifies.
+
+## 15. Polish pass, 13 November 2026
+
+Impeccable's `polish`: refinement only, in its order: broken or misleading paths first, then hierarchy and consistency, then the browser's own surfaces, then clean-up. Nothing in the visual world changes.
+
+**Paths**
+1. **A sent request is no longer a draft.** After "Send request on WhatsApp" succeeds, the saved draft is cleared. Before, a reload brought back the filled-in form, and a second, identical request was one tap away.
+2. **"On request" says how to request.** The line under the menu now reads "Prices for single services are on request: call +91 90271 56238." The number is a link. It was a dead end.
+
+**Hierarchy and consistency**
+3. **Opening hours are easy to find in the hero.** "Open till 10:30 pm" was grey, in the middle of the supporting line, though visitors decide on it. It is now slate, and it never breaks across two lines.
+4. **"Add" toggles are quieter at rest.** Fifteen idle toggles with 1.5px slate edges outweighed the service names.
+   - **At rest:** an idle toggle has a 1px edge in the line colour, the same edge as a form field. That edge is 3.4:1 on stone, above the 3:1 a control's edge needs.
+   - **Chosen:** a toggle still fills with slate, so the chosen state stands out more than before.
+   - **On the pebble band of Offers** the line colour is too faint, so the edge stays slate there.
+5. **The footer links are 44px wide at least.** On phones, "Visit", "Book", "Styles" and "Offers" were 31 to 43px wide.
+6. **Only photos that open zoom under a mouse.** The Styles photos and the artist portraits grew on hover, though clicking them does nothing. Gallery photos, which open the lightbox, keep the zoom.
+
+**The browser's own surfaces**
+7. **Selected text, the text cursor and native controls** (such as the date picker's highlight) now use the palette instead of the browser's blue: pebble behind slate for selected text, slate for the cursor and the controls.
+
+**Clean-up**
+8. **Dead code from the comb is removed.** The script still looked for comb leaders to draw, and the stylesheet still styled the old "build your own" line that the last cell of Combos replaced.
+
+**Not changed, because they need the owner's say:**
+- The offer price flag shares the Book button's outlined look, because section 4 of `CLAUDE.md` asks for a slate outline on marigold over a light surface.
+- The outlined second line of the sliding band.
+- The "Artist: No preference" line in every request, which the brief's message format includes.
+- Points B1 to B6 of section 13.

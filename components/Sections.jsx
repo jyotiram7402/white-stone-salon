@@ -38,7 +38,7 @@ export function Hero() {
       <div className="wrap hero__in">
         <div className="hero__text">
           <h1 id="hero-title" data-intro="lines">Hair, beard and skin care on <span className="nowrap">Fountain Road,</span> Kharadi</h1>
-          <p className="hero__line lead" data-intro="fade">A unisex salon opposite Cheryl Society. <span data-todo="">{business.hours}</span></p>
+          <p className="hero__line lead" data-intro="fade">A unisex salon opposite Cheryl Society. <span className="hero__hours" data-todo="">{business.hours}</span></p>
           <div className="hero__actions" data-intro="fade">
             <a className="btn btn--book" href="#book">Book an appointment</a>
             <a className="btn btn--line" href={business.phoneHref}>
@@ -117,9 +117,11 @@ export function Services() {
           ))}
         </div>
 
-        {/* The salon has sent package prices only. Delete the first sentence when every single price is in. */}
+        {/* The salon has sent package prices only. When every single price is in, delete the first sentence
+            and its call link. */}
         <p className="services__note" data-rv="up">
-          <span data-todo="">Prices for single services are on request.</span>
+          <span data-todo="">Prices for single services are on request:</span>{' '}
+          <a href={business.phoneHref}>{'call ' + business.phoneDisplay}</a>.
           {has.offers && <>{' '}<a href="#offers">See the offers on men&rsquo;s packages</a>.</>}
         </p>
       </div>

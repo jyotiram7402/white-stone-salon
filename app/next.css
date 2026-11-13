@@ -25,15 +25,10 @@ html:root {
 .styles__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
 .look { display: grid; align-content: start; gap: var(--s2); }
 .look__caption { font-size: 0.9375rem; line-height: 1.3; }
-.look .photo img { transition: transform var(--t-slow) var(--ease-out); }
 .styles__note { padding-top: var(--s5); border-top: 1px solid var(--slate); color: var(--ash); }
 
 /* The note that says a section's photos are samples. */
 .sample-note { margin-top: var(--s5); color: var(--ash); }
-
-@media (hover: hover) and (pointer: fine) {
-  .look:hover .photo img { transform: scale(1.05); }
-}
 
 @media (min-width: 48em) {
   .styles__group { grid-template-columns: 9rem minmax(0, 1fr); gap: var(--s6); padding-block: var(--s6); }
