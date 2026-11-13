@@ -1,5 +1,7 @@
 # Design plan: White Stone Salon
 
+Since 13 November 2026 the owner's brief is in `docs/BRIEF.md`, with its section numbers kept. Where this document cites "CLAUDE.md section N", read `docs/BRIEF.md` section N. The rules of the old section 1 are now under Conventions in `CLAUDE.md`.
+
 Written before the build, then revised against CLAUDE.md section 4. The revisions are listed at the end.
 The `frontend-design` skill named in CLAUDE.md section 11 is not installed on this machine, so this plan was written without it.
 

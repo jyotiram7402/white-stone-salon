@@ -1,8 +1,8 @@
 # White Stone Salon website
 
-One page for White Stone Salon, Kharadi, Pune. It is a Next.js app. Vercel installs the packages and builds it; nothing is ever run on this machine.
+One page for White Stone Salon, Kharadi, Pune. It is a Next.js app. Vercel installs the packages and builds it from GitHub.
 
-Standing rules for anyone (or any assistant) editing this project are in `CLAUDE.md`. Read them first.
+Standing rules for anyone (or any assistant) editing this project are in `CLAUDE.md` (setup, commands, conventions) and `docs/BRIEF.md` (the owner's full brief). Read them first.
 
 ## What is where
 
@@ -44,13 +44,13 @@ docs/                     design plan, photo list, photo credits, missing conten
 
 3. Press Deploy. Vercel runs `npm install` and `next build` and gives the site an address. Every later change pushed to the repository is built and published the same way.
 
-**If the build fails,** open the failed deployment, copy the red lines from the build log and send them. They name the file and the line. This app has never been built: it was written on a machine where nothing can be run, so a first-build error is possible and is fixed from that log.
+**If the build fails,** open the failed deployment, copy the red lines from the build log and send them. They name the file and the line. On a machine where commands are allowed, `npm run build` usually shows the same errors before you push.
 
 ## Preview
 
 - **On Vercel.** A Next.js app cannot be opened by double-clicking a file. Each push to GitHub gets its own preview address on Vercel about a minute later. That is the real site.
 - **The earlier version, from the disk.** Double-click `site/index.html` in File Explorer so that it opens in Chrome or Edge. It is the first plain-HTML build: no Styles section, no sample photos, no packages, the old order of sections. It shares the stylesheet with the live site, which has moved on, so parts of it (Offers, Combos) no longer look right. It is a reference for the script, not what gets published. Judge the site on Vercel.
-- **Never judge either in the Claude app's Browser pane.** That pane shows a snapshot of one file without its stylesheet and script, so the page looks unstyled and nothing moves.
+- **Never open `site/index.html` in the Claude app's Browser pane.** The pane shows a local file as a snapshot without its stylesheet and script, so the page looks unstyled and nothing moves. The Vercel address works there.
 - **On a machine where commands are allowed:** `npm install`, then `npm run dev`, then open the address it prints.
 
 While looking at the site:
@@ -85,7 +85,7 @@ Whenever you fill in something that had a red outline, remove its `data-todo`.
 
 ### Rules that keep the site building and working
 
-- Never run a command on this machine. Never add `node_modules`, `.next` or a `package-lock.json` to the repository.
+- Never run a command on the old office laptop; `CLAUDE.md` says how to allow them on a new one. Never add `node_modules` or `.next` to the repository, and add a `package-lock.json` only when the owner decides to.
 - Plain JavaScript only: no TypeScript, no ESLint config, no Tailwind, no new packages.
 - Next.js stays on version 15 (`"next": "^15.5.29"`). Version 16 drops Safari before 16.4, which would cut off older iPhones.
 - Links between pages are plain `<a>` tags, not `next/link`: the script starts once per page load.

@@ -2,6 +2,11 @@
 Thumbs.db
 .claude/settings.local.json
 
+# Local secrets and personal notes: never committed. The site reads no env variables today.
+.env*
+!.env.example
+CLAUDE.local.md
+
 # Next.js: made by "npm install" and "next build". Vercel makes its own; never upload these.
 node_modules/
 .next/
