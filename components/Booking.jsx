@@ -152,12 +152,13 @@ export function Booking() {
 }
 
 /* ---------- 11. Visit ---------- */
+// Order: heading, facts, buttons, photo. On phones the section stacks in this order, so someone looking for
+// the address meets it first. From 1024px the grid in site.css places the photo on the left.
 export function Visit() {
   return (
     <section className="section visit" id="visit" aria-labelledby="visit-title">
       <div className="wrap visit__in">
         <h2 className="visit__title" data-rv="lines" id="visit-title">Visit</h2>
-        <Photo photo={visit} className="visit__photo" sizes="(min-width: 64em) 55vw, 100vw" reveal imgProps={{ 'data-drift': '6' }} />
         <div className="visit__text">
           <dl className="facts" data-rv="kids">
             <div className="fact">
@@ -201,6 +202,7 @@ export function Visit() {
             </a>
           </div>
         </div>
+        <Photo photo={visit} className="visit__photo" sizes="(min-width: 64em) 55vw, 100vw" reveal imgProps={{ 'data-drift': '6' }} />
       </div>
     </section>
   );

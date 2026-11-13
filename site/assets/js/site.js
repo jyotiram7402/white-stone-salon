@@ -510,6 +510,7 @@
     var closeAt = form.getAttribute('data-close') || '22:30';
 
     var picked = [];      // what is in the booking: [{ key: 'svc:Haircut', label: 'Haircut' }]
+    var comboOwned = {};  // the services each combo added itself, by its data-combo text: { 'Haircut|Beard trimming': ['Beard trimming'] }
     var shownKeys = {};   // chips already on screen, so only new ones animate in
     var serviceNames = $all('[data-add]').map(function (b) { return b.getAttribute('data-add'); });
 
@@ -529,7 +530,16 @@
     }
     function has(key) { return indexOfKey(key) > -1; }
     function add(key, label) { if (!has(key)) picked.push({ key: key, label: label }); }
-    function remove(key) { var i = indexOfKey(key); if (i > -1) picked.splice(i, 1); }
+    function remove(key) {
+      var i = indexOfKey(key);
+      if (i > -1) picked.splice(i, 1);
+      if (key.indexOf('svc:') === 0) {   // a service that has gone belongs to no combo any more
+        var n = key.slice(4);
+        Object.keys(comboOwned).forEach(function (k) {
+          comboOwned[k] = comboOwned[k].filter(function (m) { return m !== n; });
+        });
+      }
+    }
 
     function offerLabel(btn) {
       var slip = btn.closest('.offer');
@@ -537,20 +547,56 @@
       return 'Offer: ' + (title ? title.textContent.trim() : btn.getAttribute('data-offer'));
     }
 
+    // An offer is counted as a package, the word the Offers section and the booking list use.
     function summary() {
       var services = 0;
-      var offers = 0;
-      picked.forEach(function (p) { if (p.key.indexOf('offer:') === 0) offers++; else services++; });
+      var packages = 0;
+      picked.forEach(function (p) { if (p.key.indexOf('offer:') === 0) packages++; else services++; });
       var parts = [];
       if (services) parts.push(services + (services === 1 ? ' service' : ' services'));
-      if (offers) parts.push(offers + (offers === 1 ? ' offer' : ' offers'));
+      if (packages) parts.push(packages + (packages === 1 ? ' package' : ' packages'));
       return parts.length ? parts.join(' and ') + ' selected' : 'No services selected';
+    }
+
+    // A combo is on while all of its services are in the booking.
+    function comboIsOn(key) {
+      return key.split('|').every(function (n) { return has('svc:' + n); });
+    }
+
+    // Turning a combo on adds its services and remembers which ones it added itself.
+    // Turning it off removes only those, so a service chosen on its own stays. A service that another
+    // combo which is on still needs also stays, and that combo takes it over. If the combo added nothing
+    // (its services had all been chosen one by one), the visitor is removing the combo as a whole:
+    // all of its services go, except those another combo still needs.
+    function toggleCombo(key) {
+      var names = key.split('|');
+      if (!comboIsOn(key)) {
+        // Keep what it added before (if the visitor removed one of its services by hand and is turning it
+        // back on), plus whatever it adds now.
+        var before = (comboOwned[key] || []).filter(function (n) { return has('svc:' + n); });
+        comboOwned[key] = before.concat(names.filter(function (n) { return !has('svc:' + n); }));
+        names.forEach(function (n) { add('svc:' + n, n); });
+        return;
+      }
+      var mine = (comboOwned[key] || []).filter(function (n) { return has('svc:' + n); });
+      if (!mine.length) mine = names.slice();
+      delete comboOwned[key];
+      var othersOn = $all('[data-combo]')
+        .map(function (b) { return b.getAttribute('data-combo'); })
+        .filter(function (k) { return k !== key && comboIsOn(k); });
+      mine.forEach(function (n) {
+        var keeper = othersOn.filter(function (k) { return k.split('|').indexOf(n) > -1; })[0];
+        if (!keeper) { remove('svc:' + n); return; }
+        comboOwned[keeper] = comboOwned[keeper] || [];
+        if (comboOwned[keeper].indexOf(n) < 0) comboOwned[keeper].push(n);
+      });
     }
 
     function saveDraft() {
       try {
         sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
           items: picked,
+          combos: comboOwned,
           artist: artist.value,
           date: date.value,
           time: time.value,
@@ -572,8 +618,7 @@
         b.setAttribute('aria-pressed', String(has('offer:' + b.getAttribute('data-offer'))));
       });
       $all('[data-combo]').forEach(function (b) {
-        var all = b.getAttribute('data-combo').split('|').every(function (n) { return has('svc:' + n); });
-        b.setAttribute('aria-pressed', String(all));
+        b.setAttribute('aria-pressed', String(comboIsOn(b.getAttribute('data-combo'))));
       });
       $all('option', serviceAdd).forEach(function (o) {   // a package's value is already its key ("offer:7")
         if (o.value) o.disabled = has(o.value.indexOf('offer:') === 0 ? o.value : 'svc:' + o.value);
@@ -629,9 +674,7 @@
         key = 'offer:' + t.getAttribute('data-offer');
         if (has(key)) remove(key); else add(key, offerLabel(t));
       } else if (t.hasAttribute('data-combo')) {
-        var names = t.getAttribute('data-combo').split('|');
-        var all = names.every(function (n) { return has('svc:' + n); });
-        names.forEach(function (n) { if (all) remove('svc:' + n); else add('svc:' + n, n); });
+        toggleCombo(t.getAttribute('data-combo'));
       } else {
         // A chip's remove button. The chip goes, so focus moves to the next chip, or to "Add a service".
         key = t.getAttribute('data-remove');
@@ -920,6 +963,15 @@
             var btn = $('[data-offer="' + it.key.slice(6).replace(/[^\w-]/g, '') + '"]');
             if (btn) add('offer:' + btn.getAttribute('data-offer'), offerLabel(btn));
           }
+        });
+      }
+      // Which combo added what, for combos still on the page and services still in the menu.
+      if (draft.combos && typeof draft.combos === 'object') {
+        $all('[data-combo]').forEach(function (b) {
+          var k = b.getAttribute('data-combo');
+          var owned = draft.combos[k];
+          if (!Array.isArray(owned)) return;
+          comboOwned[k] = owned.filter(function (n) { return typeof n === 'string' && serviceNames.indexOf(n) > -1; });
         });
       }
       if (typeof draft.name === 'string') nameEl.value = draft.name;

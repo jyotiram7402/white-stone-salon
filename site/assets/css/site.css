@@ -566,14 +566,16 @@ summary::-webkit-details-marker { display: none; }
 
 /* ---------- 2.9 Offers: a price list on a pebble band ---------- */
 /* A row: the package's name, what is in it, the regular price struck through, the offer price on a
-   marigold flag, and an "Add" toggle. From 1024px the rows run down two columns (section 2.21). */
+   marigold flag, and an "Add" toggle. On phones the contents take the full width and the toggle sits
+   under them; from 768px the toggle moves beside the contents (2.20); from 1024px the rows run down
+   two columns (2.21). */
 .offers { background: var(--pebble); }
 .offers .lead { color: var(--slate); }   /* on pebble, slate text only */
 .offers__list { display: grid; padding-top: 1px; }
 .offer {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas: "title price" "what add";
+  grid-template-areas: "title price" "what what" ". add";
   align-items: start;
   gap: var(--s2) var(--s4);
   margin-top: -1px;   /* neighbours share one rule */
@@ -582,7 +584,7 @@ summary::-webkit-details-marker { display: none; }
   border-bottom: 1px solid var(--line);
 }
 .offer__title { grid-area: title; }
-.offer__what { grid-area: what; font-size: 0.9375rem; line-height: 1.45; }
+.offer__what { grid-area: what; font-size: 1rem; line-height: 1.45; }   /* body text: 16px at least */
 .offer__price {
   grid-area: price;
   display: flex;
@@ -1004,6 +1006,9 @@ summary::-webkit-details-marker { display: none; }
   .hero__text { padding-bottom: var(--s5); }
   .hero__actions .btn--book { flex: 0 1 auto; }
   .hero__photo { margin-right: 0; border-radius: 2px; }
+
+  /* A package: the toggle moves up beside its contents, now that there is room for both. */
+  .offer { grid-template-areas: "title price" "what add"; }
 
   /* A combo in one line: name, services, button. */
   .combo { grid-template-columns: 13rem minmax(0, 1fr) auto; align-items: center; gap: var(--s5); padding-block: var(--s4); }

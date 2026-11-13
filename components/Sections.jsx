@@ -170,7 +170,7 @@ export function Combos() {
       <div className="wrap">
         <div className="section__head">
           <h2 data-rv="lines" id="combos-title">Combos</h2>
-          <p className="lead" data-rv="up">Services that go together in one visit.</p>
+          <p className="lead" data-rv="up">Shortcuts for services that go together. One tap adds them all to your booking.</p>
         </div>
         <ul className="combos__list" data-rv="kids">
           {combos.map((combo) => (

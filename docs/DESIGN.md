@@ -508,3 +508,33 @@ Still open from the critique, for later:
   - B4: empty photo frames in the presentation view look like failed images.
   - B5: the motion as a whole reads as a stock kit; keep one moment that is the salon's own.
   - B6: there is no choice for a service that appears only inside packages, such as hair colour; add "Something else (say what in the note)".
+
+## 14. The three P2 fixes, 13 November 2026
+
+The owner asked for the three P2 issues from section 13. Points B1 to B6 still wait for the owner.
+
+1. **Packages on phones.**
+   - Below 768px a package row now reads in three lines: the name with its prices, then what it includes across the full width, then the "Add" toggle at the right.
+   - The contents were squeezed into a column about 210px wide beside the toggle, wrapping to as many as six lines. Across the full width most packages take two lines.
+   - From 768px the row keeps its earlier shape, with the contents beside the toggle, since there is room for both.
+   - The contents are set at 16px everywhere, the floor section 4 of `CLAUDE.md` sets for body text; they were 15px.
+
+```
+390
+Package 7                        Rs 1,400 [Rs 1,149]
+Haircut, Beard trimming or shaving, Hair wash,
+Head and shoulder massage, D-tan face clean-up (Ozone)
+                                            [ + Add ]
+```
+
+2. **Visit puts the facts first.**
+   - The section now reads: heading, the facts, the two buttons, then the shopfront photo.
+   - That is the order section 5 of `CLAUDE.md` lists, and the order the markup now follows, so screen readers get it too.
+   - On desktop nothing moves: the grid still places the photo on the left, beside the heading and the facts.
+
+3. **Combos are shortcuts, and turning one off is fair.**
+   - **The intro line** now says what a combo is and what a tap does: "Shortcuts for services that go together. One tap adds them all to your booking." It claims no price and no saving, because the combos are not confirmed.
+   - **Turning a combo off** now removes only the services that combo added itself. A service the visitor chose one by one stays. So does a service that another chosen combo still needs; that combo takes it over.
+   - **When a combo added nothing,** because all its services had already been chosen one by one, turning it off removes them all. The visitor is removing the combo as a whole.
+   - **Saved with the draft.** Which combo added what is kept with the rest of the draft, so it survives a reload.
+   - **The selected-services bar** now counts packages as packages ("1 service and 1 package selected"), the word the Offers section and the booking list use. The booking request keeps its "Offer: Package 7 (Rs 1,149)" line, as section 5 of `CLAUDE.md` specifies.
